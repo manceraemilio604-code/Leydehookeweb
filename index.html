@@ -31,11 +31,21 @@
             color: var(--gris-texto);
         }
 
+        /* CONTENEDOR GENERAL QUE ENMARCA TODA LA PÁGINA (EXCEPTO BANNER) */
+        .page-wrapper {
+            max-width: 1250px;
+            margin: 30px auto 40px;
+            background: #ffffff;
+            border-radius: 22px;
+            box-shadow: 0 12px 35px rgba(15, 23, 42, 0.09);
+            padding-bottom: 40px;
+            overflow: hidden;
+        }
+
         /* MENÚ SUPERIOR */
         nav.menu {
             display: flex;
             justify-content: center;
-            /* centrado */
             gap: 40px;
             padding: 20px 40px;
             background: #ffffff;
@@ -64,7 +74,7 @@
             font-weight: 600;
         }
 
-        /* ================== BANNER ================== */
+        /* ================== BANNER (FUERA DE LA TARJETA) ================== */
         .hero-banner {
             width: 100%;
             height: 330px;
@@ -127,7 +137,7 @@
 
         /* ================================================================ */
 
-        /* SECCIONES GENERALES */
+        /* SECCIONES GENERALES DENTRO DE LA TARJETA */
         section {
             padding: 30px 60px;
         }
@@ -153,16 +163,6 @@
 
         #contenido {
             padding-top: 10px;
-        }
-
-        /* TARJETA ESTILO INTRO (CUADRO BLANCO) */
-        .card-intro {
-            background: #ffffff;
-            border-radius: 18px;
-            box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
-            padding: 35px 45px 40px;
-            margin-top: 20px;
-            margin-bottom: 20px;
         }
 
         /* TÍTULOS Y SUBTÍTULOS A LA IZQUIERDA */
@@ -415,20 +415,15 @@
         .img-tooltip {
             position: relative;
             display: inline-block;
-            /* sólo ocupa el tamaño de la imagen */
         }
 
         /* TOOLTIP A LA DERECHA, CENTRADO EN ALTURA */
         .tooltip-box {
             position: absolute;
             top: 50%;
-            /* mitad de la imagen */
             right: -10px;
-            /* pegado al borde derecho */
             left: auto;
             transform: translate(100%, -50%);
-            /* lo sacas hacia la derecha y lo centras verticalmente */
-
             background: rgba(0, 0, 0, 0.85);
             color: #ffffff;
             padding: 10px 14px;
@@ -440,8 +435,6 @@
             pointer-events: none;
             transition: opacity 0.25s ease;
             z-index: 50;
-
-            /* para que el texto y el link no se salgan */
             white-space: normal;
             overflow-wrap: anywhere;
             word-break: break-word;
@@ -471,8 +464,9 @@
                 padding-right: 20px;
             }
 
-            .card-intro {
-                padding: 25px 20px 30px;
+            .page-wrapper {
+                margin: 20px 10px 30px;
+                border-radius: 18px;
             }
 
             .hero-text h1 {
@@ -492,7 +486,7 @@
 
 <body>
 
-    <!-- HOME / BANNER -->
+    <!-- HOME / BANNER (A PANTALLA COMPLETA) -->
     <section id="home">
         <div class="hero-banner">
             <div class="hero-text">
@@ -503,18 +497,20 @@
         </div>
     </section>
 
-    <!-- MENÚ -->
-    <nav class="menu">
-        <a href="#home" class="activo">Home</a>
-        <a href="#introduccion">Introducción</a>
-        <a href="#contenido">Contenido</a>
-        <a href="#actividades">Actividades</a>
-        <a href="#fuentes">Bibliografía</a>
-    </nav>
+    <!-- CONTENEDOR GENERAL BLANCO -->
+    <div class="page-wrapper">
 
-    <!-- 1. INTRODUCCIÓN -->
-    <section id="introduccion">
-        <div class="card-intro">
+        <!-- MENÚ -->
+        <nav class="menu">
+            <a href="#home" class="activo">Home</a>
+            <a href="#introduccion">Introducción</a>
+            <a href="#contenido">Contenido</a>
+            <a href="#actividades">Actividades</a>
+            <a href="#fuentes">Bibliografía</a>
+        </nav>
+
+        <!-- 1. INTRODUCCIÓN -->
+        <section id="introduccion">
             <h2>1. Introducción</h2>
 
             <p>
@@ -548,751 +544,752 @@
                     Figura 1. Curva esfuerzo–deformación uniaxial típica.
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- 2. CONTENIDO -->
-    <section id="contenido">
-        <h2>2. Contenido</h2>
-
-        <!-- 2.1 -->
-        <h3>2.1. Conceptos fundamentales</h3>
-
-        <table class="tabla-simple">
-            <thead>
-                <tr>
-                    <th>Concepto</th>
-                    <th>Definición</th>
-                    <th>Variable típica</th>
-                    <th>Unidades (SI)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Esfuerzo normal</td>
-                    <td>Fuerza interna distribuida sobre un área transversal.</td>
-                    <td>\(\sigma\)</td>
-                    <td>Pa (N/m²)</td>
-                </tr>
-                <tr>
-                    <td>Esfuerzo cortante</td>
-                    <td>Esfuerzo que actúa paralelo al área de corte.</td>
-                    <td>\(\tau\)</td>
-                    <td>Pa (N/m²)</td>
-                </tr>
-                <tr>
-                    <td>Deformación normal</td>
-                    <td>Cambio relativo de longitud respecto a la longitud inicial.</td>
-                    <td>\(\varepsilon\)</td>
-                    <td>– (adimensional)</td>
-                </tr>
-                <tr>
-                    <td>Deformación angular</td>
-                    <td>Cambio en el ángulo entre dos direcciones originalmente perpendiculares.</td>
-                    <td>\(\gamma\)</td>
-                    <td>rad (normalmente tratada como adimensional)</td>
-                </tr>
-                <tr>
-                    <td>Elasticidad</td>
-                    <td>Capacidad de recuperar la forma al retirar las cargas.</td>
-                    <td>–</td>
-                    <td>–</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <!-- 2.2 -->
-        <h3>2.2. Ley de Hooke unidimensional</h3>
-
-        <div class="equation">
-            \[
-            \sigma = E\,\varepsilon
-            \]
-        </div>
-
-        <h4>Significado de las variables</h4>
-        <ul>
-            <li>\(\sigma\): esfuerzo normal aplicado</li>
-            <li>\(\varepsilon\): deformación normal resultante</li>
-            <li>\(E\): módulo de Young o módulo de elasticidad del material</li>
-        </ul>
-
-        <p>
-            En la versión unidimensional se supone que el elemento solo trabaja a lo largo de un eje
-            (por ejemplo, el eje \(x\)), de modo que los esfuerzos en las demás direcciones son despreciables. El estado
-            de esfuerzo se reduce entonces a un solo esfuerzo normal \(\sigma\) y a una sola deformación normal
-            \(\varepsilon\), por lo que la relación constitutiva del material se simplifica a la forma lineal
-            \(\sigma = E\,\varepsilon\).
-        </p>
-
-        <p>
-            Un caso muy sencillo donde se observa este comportamiento es el de un resorte ideal sometido a tensión o
-            compresión. En ese caso la fuerza aplicada \(F\) es proporcional al desplazamiento \(x\):
-        </p>
-
-        <div class="equation">
-            \[
-            F = kx
-            \]
-        </div>
-
-        <p>
-            donde \(F\) es la fuerza axial aplicada, \(x\) es el alargamiento (o acortamiento) del resorte y \(k\) es la
-            constante elástica. Esta relación es análoga a \(\sigma = E\,\varepsilon\): en ambos modelos la respuesta
-            (deformación o desplazamiento) es directamente proporcional al nivel de carga mientras el material se
-            mantiene en la zona elástica.
-        </p>
-
-        <div class="img-centro">
-            <div class="img-tooltip">
-                <img src="Imagenes/diagrama_unidimensional.png"
-                    alt="Gráfica fuerza-desplazamiento para un resorte ideal">
-                <div class="tooltip-box">
-                    Imagen recuperada de:
-                    <br>
-                    <a href="https://cdn.fisimat.com.mx/wp-content/uploads/2015/09/Ley-de-Hooke.png" target="_blank">
-                        https://cdn.fisimat.com.mx/wp-content/uploads/2015/09/Ley-de-Hooke.png
-                    </a>
-                </div>
-            </div>
-            <div class="pie-imagen">
-                Figura 2. Relación lineal fuerza–desplazamiento de un resorte ideal (\(F = kx\)), análoga a la relación
-                esfuerzo–deformación uniaxial \(\sigma = E\,\varepsilon\).
-            </div>
-        </div>
-
-        <!-- 2.3 -->
-        <h3>2.3. Ley de Hooke Generalizada para sólidos isotrópicos</h3>
-
-        <div class="equation">
-            \[
-            \varepsilon_x = \frac{1}{E}\,\bigl(\sigma_x - \nu(\sigma_y + \sigma_z)\bigr)
-            \]
-            \[
-            \varepsilon_y = \frac{1}{E}\,\bigl(\sigma_y - \nu(\sigma_x + \sigma_z)\bigr)
-            \]
-            \[
-            \varepsilon_z = \frac{1}{E}\,\bigl(\sigma_z - \nu(\sigma_x + \sigma_y)\bigr)
-            \]
-        </div>
-
-        <h4>Significado de las variables</h4>
-        <ul>
-            <li>\(\varepsilon_x, \varepsilon_y, \varepsilon_z\): deformaciones normales en los ejes \(x\), \(y\) y \(z\)
-            </li>
-            <li>\(\sigma_x, \sigma_y, \sigma_z\): esfuerzos normales aplicados en las direcciones \(x\), \(y\) y \(z\)</li>
-            <li>\(E\): módulo de Young</li>
-            <li>\(\nu\): coeficiente de Poisson (relaciona la deformación transversal con la longitudinal)</li>
-        </ul>
-
-        <div class="img-centro">
-            <div class="img-tooltip">
-                <img src="Imagenes/cubo_esfuerzos_normales.png"
-                    alt="Cubo sometido a esfuerzos σx, σy y σz">
-                <div class="tooltip-box">
-                    Imagen recuperada de:
-                    <br>
-                    <a href="https://caeflow.com/wp-content/uploads/2025/07/3d-mohr-circle-calculator.png"
-                        target="_blank">
-                        https://caeflow.com/wp-content/uploads/2025/07/3d-mohr-circle-calculator.png
-                    </a>
-                </div>
-            </div>
-            <div class="pie-imagen">
-                Figura 3. Elemento cúbico sometido a esfuerzos normales en las tres direcciones principales,
-                representando un estado multiaxial de esfuerzo en un sólido isotrópico.
-            </div>
-        </div>
-
-        <p>
-            Estas ecuaciones indican que la deformación en un eje depende del esfuerzo en ese mismo eje y también de los
-            esfuerzos en los ejes perpendiculares.
-        </p>
-
-        <!-- 2.4 -->
-        <h3>2.4. Esfuerzos cortantes y módulo de rigidez</h3>
-
-        <div class="equation">
-            \[
-            \tau = G\,\gamma
-            \]
-        </div>
-
-        <h4>Significado de las variables</h4>
-        <ul>
-            <li>\(\tau\): esfuerzo cortante</li>
-            <li>\(\gamma\): deformación angular o cortante</li>
-            <li>\(G\): módulo de rigidez o módulo cortante del material</li>
-        </ul>
-
-        <p>La relación entre \(G\), \(E\) y \(\nu\) es:</p>
-
-        <div class="equation">
-            \[
-            G = \frac{E}{2(1+\nu)}
-            \]
-        </div>
-
-        <h4>Significado de las variables</h4>
-        <ul>
-            <li>\(E\): módulo de Young</li>
-            <li>\(\nu\): coeficiente de Poisson</li>
-            <li>\(G\): módulo cortante, propiedad que describe la resistencia del material a deformarse por cortante</li>
-        </ul>
-
-        <div class="img-centro">
-            <div class="img-tooltip">
-                <img src="Imagenes/torsion_eje_circular.png" alt="Eje circular sometido a torsión">
-                <div class="tooltip-box">
-                    Imagen recuperada de:
-                    <br>
-                    <a href="https://lawebdeingeniosos.com/wp-content/uploads/2023/05/carga-01-1.png" target="_blank">
-                        https://lawebdeingeniosos.com/wp-content/uploads/2023/05/carga-01-1.png
-                    </a>
-                </div>
-            </div>
-            <div class="pie-imagen">
-                Figura 4. Eje circular sometido a torsión: el esfuerzo cortante máximo aparece en la superficie y está
-                asociado a una deformación angular \(\gamma\).
-            </div>
-        </div>
-
-        <!-- TABLA RESUMEN -->
-        <h4>Resumen de relaciones elásticas vistas</h4>
-
-        <table class="tabla-resumen">
-            <thead>
-                <tr>
-                    <th>Tipo de relación</th>
-                    <th>Ecuación representativa</th>
-                    <th>Variables principales</th>
-                    <th>Aplicación típica</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Unidimensional</td>
-                    <td>\(\sigma = E\,\varepsilon\)</td>
-                    <td>\(\sigma\), \(\varepsilon\), \(E\)</td>
-                    <td>Barras traccionadas o comprimidas en un solo eje.</td>
-                </tr>
-                <tr>
-                    <td>Generalizada en 3D</td>
-                    <td>\(\varepsilon_i = \dfrac{1}{E}\bigl(\sigma_i - \nu(\sigma_j+\sigma_k)\bigr)\)</td>
-                    <td>\(\sigma_x,\sigma_y,\sigma_z,\varepsilon_x,\varepsilon_y,\varepsilon_z,\nu\)</td>
-                    <td>Estado multiaxial de esfuerzos en sólidos isotrópicos.</td>
-                </tr>
-                <tr>
-                    <td>Cortante</td>
-                    <td>\(\tau = G\,\gamma\)</td>
-                    <td>\(\tau\), \(\gamma\), \(G\)</td>
-                    <td>Ejes a torsión, elementos sometidos a cortante puro.</td>
-                </tr>
-                <tr>
-                    <td>Volumétrica</td>
-                    <td>\(\varepsilon_v = \varepsilon_x+\varepsilon_y+\varepsilon_z\)</td>
-                    <td>\(\varepsilon_v\), \(\varepsilon_x,\varepsilon_y,\varepsilon_z\)</td>
-                    <td>Cargas hidrostáticas, compresibilidad del material.</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <!-- 2.5 -->
-        <h3>2.5. Ley de Hooke en forma matricial</h3>
-
-        <div class="equation">
-            \[
-            \{\sigma\} = [D]\{\varepsilon\}
-            \]
-        </div>
-
-        <h4>Significado de las variables</h4>
-        <ul>
-            <li>\(\{\sigma\}\): vector columna de esfuerzos</li>
-            <li>\(\{\varepsilon\}\): vector columna de deformaciones</li>
-            <li>\([D]\): matriz constitutiva del material (contiene las propiedades elásticas)</li>
-        </ul>
-
-        <p>
-            Esta formulación es utilizada en métodos numéricos, como el Método de Elemento Finito.
-        </p>
-
-        <!-- 2.6 -->
-        <h3>2.6. Deformación volumétrica</h3>
-
-        <div class="equation">
-            \[
-            \varepsilon_v = \varepsilon_x + \varepsilon_y + \varepsilon_z
-            \]
-        </div>
-
-        <h4>Significado de las variables</h4>
-        <ul>
-            <li>\(\varepsilon_v\): deformación volumétrica</li>
-            <li>\(\varepsilon_x, \varepsilon_y, \varepsilon_z\): deformaciones normales en los tres ejes</li>
-        </ul>
-
-        <p>Para cargas hidrostáticas:</p>
-
-        <div class="equation">
-            \[
-            \varepsilon_v = \frac{1 - 2\nu}{E}\,(\sigma_x + \sigma_y + \sigma_z)
-            \]
-        </div>
-
-        <h4>Significado de las variables</h4>
-        <ul>
-            <li>\(\nu\): coeficiente de Poisson</li>
-            <li>\(E\): módulo de Young</li>
-            <li>\(\sigma_x + \sigma_y + \sigma_z\): suma de esfuerzos normales en cada eje</li>
-        </ul>
-
-        <!-- 2.7 -->
-        <h3>2.7. Materiales anisotrópicos</h3>
-
-        <p>
-            Los materiales anisotrópicos presentan propiedades mecánicas distintas según la dirección en la que se
-            apliquen los esfuerzos. En lugar de un módulo de Young único, existen diferentes módulos para distintas
-            direcciones, así como diferentes coeficientes de Poisson.
-        </p>
-
-        <p>
-            Ejemplos: compuestos de fibra, madera, metales laminados, polímeros orientados. Estos materiales requieren
-            un conjunto mayor de constantes para describir su comportamiento elástico. En la siguiente figura se compara
-            un arreglo anisotrópico en capas con un material isotrópico uniforme.
-        </p>
-
-        <div class="img-centro">
-            <div class="img-tooltip">
-                <img src="Imagenes/material_anisotropico_fibras.png"
-                    alt="Comparación entre estructura anisotrópica e isotrópica">
-                <div class="tooltip-box">
-                    Imagen recuperada de:
-                    <br>
-                    <a href="https://www.researchgate.net/publication/326780343/figure/fig1/AS:11431281207863077@1701349093215/The-difference-between-anisotropic-and-isotropic-surfaces-a-Anisotropic-surfaces-have.tif"
-                        target="_blank">
-                        https://www.researchgate.net/.../The-difference-between-anisotropic-and-isotropic-surfaces...
-                    </a>
-                </div>
-            </div>
-            <div class="pie-imagen">
-                Figura 5. Comparación entre (a) una estructura anisotrópica en capas y (b) una estructura isotrópica
-                uniforme.
-            </div>
-        </div>
-    </section>
-
-    <!-- 3. ACTIVIDADES -->
-    <section id="actividades">
-        <h2>3. Actividades</h2>
-
-        <!-- ACTIVIDAD 1 -->
-        <h3>ACTIVIDAD 1 – Deformación tridimensional en un sólido isotrópico</h3>
-
-        <h4>Enunciado</h4>
-        <p>
-            Un cubo de aluminio está sometido a esfuerzos normales en las tres direcciones del espacio. Determina las
-            deformaciones en cada eje y la deformación volumétrica total.
-        </p>
-
-        <h4>Datos</h4>
-
-        <div class="equation">
-            \[
-            \sigma_x = 120 \text{ MPa}, \quad
-            \sigma_y = 30 \text{ MPa}, \quad
-            \sigma_z = 0
-            \]
-        </div>
-
-        <ul>
-            <li>\(\sigma_x, \sigma_y, \sigma_z\): esfuerzos aplicados</li>
-        </ul>
-
-        <div class="equation">
-            \[
-            E = 70 \text{ GPa}, \quad
-            \nu = 0.33
-            \]
-        </div>
-
-        <ul>
-            <li>\(E\): módulo de Young</li>
-            <li>\(\nu\): coeficiente de Poisson</li>
-        </ul>
-
-        <h4>Procedimiento</h4>
-        <button class="btn-proc" onclick="toggleProcedimiento(this)">Ver procedimiento</button>
-
-        <div class="procedimiento">
-            <ol>
-                <li>
-                    <p><strong>Convertir el módulo:</strong></p>
-                    <div class="equation">
-                        \[
-                        70 \text{ GPa} = 70\,000 \text{ MPa}
-                        \]
-                    </div>
-                </li>
-
-                <li>
-                    <p><strong>Usar la ecuación generalizada para cada eje:</strong></p>
-                    <div class="equation">
-                        \[
-                        \varepsilon_x = \frac{\sigma_x - \nu(\sigma_y + \sigma_z)}{E}
-                        \]
-                        \[
-                        \varepsilon_y = \frac{\sigma_y - \nu(\sigma_x + \sigma_z)}{E}
-                        \]
-                        \[
-                        \varepsilon_z = \frac{\sigma_z - \nu(\sigma_x + \sigma_y)}{E}
-                        \]
-                    </div>
-                </li>
-
-                <li>
-                    <p><strong>Sustituir valores:</strong></p>
-                    <div class="equation">
-                        \[
-                        \varepsilon_x =
-                        \frac{120 - 0.33(30)}{70\,000}
-                        \approx 1.57 \times 10^{-3}
-                        \]
-                        \[
-                        \varepsilon_y =
-                        \frac{30 - 0.33(120)}{70\,000}
-                        \approx -1.37 \times 10^{-4}
-                        \]
-                        \[
-                        \varepsilon_z =
-                        \frac{-0.33(120 + 30)}{70\,000}
-                        \approx -7.07 \times 10^{-4}
-                        \]
-                    </div>
-                </li>
-
-                <li>
-                    <p><strong>Deformación volumétrica:</strong></p>
-                    <div class="equation">
-                        \[
-                        \varepsilon_v = \varepsilon_x + \varepsilon_y + \varepsilon_z
-                        \approx 7.29 \times 10^{-4}
-                        \]
-                    </div>
-                </li>
-            </ol>
-        </div>
-
-        <!-- ACTIVIDAD 2 -->
-        <h3>ACTIVIDAD 2 – Esfuerzo cortante y deformación angular en torsión</h3>
-
-        <h4>Enunciado</h4>
-        <p>
-            Un eje circular de acero transmite un momento de torsión. Determina el esfuerzo cortante máximo y la deformación
-            angular.
-        </p>
-
-        <h4>Datos</h4>
-
-        <div class="equation">
-            \[
-            T = 600\,\text{N}\cdot\text{m}
-            \]
-        </div>
-        <ul>
-            <li>\(T\): momento de torsión aplicado</li>
-        </ul>
-
-        <div class="equation">
-            \[
-            d = 40 \text{ mm}
-            \]
-        </div>
-        <ul>
-            <li>\(d\): diámetro del eje</li>
-        </ul>
-
-        <div class="equation">
-            \[
-            G = 80 \text{ GPa}
-            \]
-        </div>
-        <ul>
-            <li>\(G\): módulo de rigidez</li>
-        </ul>
-
-        <h4>Procedimiento</h4>
-        <button class="btn-proc" onclick="toggleProcedimiento(this)">Ver procedimiento</button>
-
-        <div class="procedimiento">
-            <ol>
-                <li>
-                    <p><strong>Convertir unidades:</strong></p>
-                    <div class="equation">
-                        \[
-                        d = 0.04 \text{ m}
-                        \]
-                        \[
-                        G = 80\,000 \text{ MPa}
-                        \]
-                    </div>
-                </li>
-
-                <li>
-                    <p><strong>Momento polar de inercia:</strong></p>
-                    <div class="equation">
-                        \[
-                        J = \frac{\pi d^{4}}{32}
-                        \]
-                        \[
-                        J = 2.01 \times 10^{-7} \text{ m}^{4}
-                        \]
-                    </div>
-                    <ul>
-                        <li>\(J\): momento polar de inercia</li>
-                    </ul>
-                </li>
-
-                <li>
-                    <p><strong>Radio:</strong></p>
-                    <div class="equation">
-                        \[
-                        r = \frac{d}{2} = 0.02 \text{ m}
-                        \]
-                    </div>
-                    <ul>
-                        <li>\(r\): radio</li>
-                    </ul>
-                </li>
-
-                <li>
-                    <p><strong>Esfuerzo cortante máximo:</strong></p>
-                    <div class="equation">
-                        \[
-                        \tau_{\max} = \frac{T\,r}{J}
-                        \]
-                        \[
-                        \tau_{\max} \approx 59.7 \text{ MPa}
-                        \]
-                    </div>
-                    <ul>
-                        <li>\(\tau_{\max}\): esfuerzo cortante máximo</li>
-                        <li>\(T\): torque</li>
-                        <li>\(J\): momento polar de inercia</li>
-                        <li>\(r\): radio</li>
-                    </ul>
-                </li>
-
-                <li>
-                    <p><strong>Deformación cortante:</strong></p>
-                    <div class="equation">
-                        \[
-                        \gamma = \frac{\tau}{G}
-                        \]
-                    </div>
-                    <ul>
-                        <li>\(\gamma\): deformación angular</li>
-                        <li>\(\tau\): esfuerzo cortante</li>
-                        <li>\(G\): módulo cortante</li>
-                    </ul>
-                </li>
-            </ol>
+        </section>
+
+        <!-- 2. CONTENIDO -->
+        <section id="contenido">
+            <h2>2. Contenido</h2>
+
+            <!-- 2.1 -->
+            <h3>2.1. Conceptos fundamentales</h3>
+
+            <table class="tabla-simple">
+                <thead>
+                    <tr>
+                        <th>Concepto</th>
+                        <th>Definición</th>
+                        <th>Variable típica</th>
+                        <th>Unidades (SI)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Esfuerzo normal</td>
+                        <td>Fuerza interna distribuida sobre un área transversal.</td>
+                        <td>\(\sigma\)</td>
+                        <td>Pa (N/m²)</td>
+                    </tr>
+                    <tr>
+                        <td>Esfuerzo cortante</td>
+                        <td>Esfuerzo que actúa paralelo al área de corte.</td>
+                        <td>\(\tau\)</td>
+                        <td>Pa (N/m²)</td>
+                    </tr>
+                    <tr>
+                        <td>Deformación normal</td>
+                        <td>Cambio relativo de longitud respecto a la longitud inicial.</td>
+                        <td>\(\varepsilon\)</td>
+                        <td>– (adimensional)</td>
+                    </tr>
+                    <tr>
+                        <td>Deformación angular</td>
+                        <td>Cambio en el ángulo entre dos direcciones originalmente perpendiculares.</td>
+                        <td>\(\gamma\)</td>
+                        <td>rad (normalmente tratada como adimensional)</td>
+                    </tr>
+                    <tr>
+                        <td>Elasticidad</td>
+                        <td>Capacidad de recuperar la forma al retirar las cargas.</td>
+                        <td>–</td>
+                        <td>–</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- 2.2 -->
+            <h3>2.2. Ley de Hooke unidimensional</h3>
 
             <div class="equation">
                 \[
-                \gamma \approx 7.46 \times 10^{-4}
+                \sigma = E\,\varepsilon
                 \]
             </div>
-        </div>
 
-        <!-- CUESTIONARIO -->
-        <h3>Cuestionario</h3>
+            <h4>Significado de las variables</h4>
+            <ul>
+                <li>\(\sigma\): esfuerzo normal aplicado</li>
+                <li>\(\varepsilon\): deformación normal resultante</li>
+                <li>\(E\): módulo de Young o módulo de elasticidad del material</li>
+            </ul>
 
-        <div class="container">
-            <div class="box">
-                <h3 style="color: var(--primario); text-align:left;">Cuestionario</h3>
-                <button class="btn" onclick="abrirModal('modalCuestionario')">Ver ejercicios</button>
+            <p>
+                En la versión unidimensional se supone que el elemento solo trabaja a lo largo de un eje
+                (por ejemplo, el eje \(x\)), de modo que los esfuerzos en las demás direcciones son despreciables. El estado
+                de esfuerzo se reduce entonces a un solo esfuerzo normal \(\sigma\) y a una sola deformación normal
+                \(\varepsilon\), por lo que la relación constitutiva del material se simplifica a la forma lineal
+                \(\sigma = E\,\varepsilon\).
+            </p>
+
+            <p>
+                Un caso muy sencillo donde se observa este comportamiento es el de un resorte ideal sometido a tensión o
+                compresión. En ese caso la fuerza aplicada \(F\) es proporcional al desplazamiento \(x\):
+            </p>
+
+            <div class="equation">
+                \[
+                F = kx
+                \]
             </div>
-        </div>
 
-        <div id="modalCuestionario" class="modal">
-            <div class="modal-content">
-                <span class="close" onclick="cerrarModal('modalCuestionario')">&times;</span>
-                <h2 style="color: var(--primario); text-align:left;">Cuestionario</h2>
+            <p>
+                donde \(F\) es la fuerza axial aplicada, \(x\) es el alargamiento (o acortamiento) del resorte y \(k\) es la
+                constante elástica. Esta relación es análoga a \(\sigma = E\,\varepsilon\): en ambos modelos la respuesta
+                (deformación o desplazamiento) es directamente proporcional al nivel de carga mientras el material se
+                mantiene en la zona elástica.
+            </p>
 
+            <div class="img-centro">
+                <div class="img-tooltip">
+                    <img src="Imagenes/diagrama_unidimensional.png"
+                        alt="Gráfica fuerza-desplazamiento para un resorte ideal">
+                    <div class="tooltip-box">
+                        Imagen recuperada de:
+                        <br>
+                        <a href="https://cdn.fisimat.com.mx/wp-content/uploads/2015/09/Ley-de-Hooke.png" target="_blank">
+                            https://cdn.fisimat.com.mx/wp-content/uploads/2015/09/Ley-de-Hooke.png
+                        </a>
+                    </div>
+                </div>
+                <div class="pie-imagen">
+                    Figura 2. Relación lineal fuerza–desplazamiento de un resorte ideal (\(F = kx\)), análoga a la relación
+                    esfuerzo–deformación uniaxial \(\sigma = E\,\varepsilon\).
+                </div>
+            </div>
+
+            <!-- 2.3 -->
+            <h3>2.3. Ley de Hooke Generalizada para sólidos isotrópicos</h3>
+
+            <div class="equation">
+                \[
+                \varepsilon_x = \frac{1}{E}\,\bigl(\sigma_x - \nu(\sigma_y + \sigma_z)\bigr)
+                \]
+                \[
+                \varepsilon_y = \frac{1}{E}\,\bigl(\sigma_y - \nu(\sigma_x + \sigma_z)\bigr)
+                \]
+                \[
+                \varepsilon_z = \frac{1}{E}\,\bigl(\sigma_z - \nu(\sigma_x + \sigma_y)\bigr)
+                \]
+            </div>
+
+            <h4>Significado de las variables</h4>
+            <ul>
+                <li>\(\varepsilon_x, \varepsilon_y, \varepsilon_z\): deformaciones normales en los ejes \(x\), \(y\) y \(z\)
+                </li>
+                <li>\(\sigma_x, \sigma_y, \sigma_z\): esfuerzos normales aplicados en las direcciones \(x\), \(y\) y \(z\)</li>
+                <li>\(E\): módulo de Young</li>
+                <li>\(\nu\): coeficiente de Poisson (relaciona la deformación transversal con la longitudinal)</li>
+            </ul>
+
+            <div class="img-centro">
+                <div class="img-tooltip">
+                    <img src="Imagenes/cubo_esfuerzos_normales.png"
+                        alt="Cubo sometido a esfuerzos σx, σy y σz">
+                    <div class="tooltip-box">
+                        Imagen recuperada de:
+                        <br>
+                        <a href="https://caeflow.com/wp-content/uploads/2025/07/3d-mohr-circle-calculator.png"
+                            target="_blank">
+                            https://caeflow.com/wp-content/uploads/2025/07/3d-mohr-circle-calculator.png
+                        </a>
+                    </div>
+                </div>
+                <div class="pie-imagen">
+                    Figura 3. Elemento cúbico sometido a esfuerzos normales en las tres direcciones principales,
+                    representando un estado multiaxial de esfuerzo en un sólido isotrópico.
+                </div>
+            </div>
+
+            <p>
+                Estas ecuaciones indican que la deformación en un eje depende del esfuerzo en ese mismo eje y también de los
+                esfuerzos en los ejes perpendiculares.
+            </p>
+
+            <!-- 2.4 -->
+            <h3>2.4. Esfuerzos cortantes y módulo de rigidez</h3>
+
+            <div class="equation">
+                \[
+                \tau = G\,\gamma
+                \]
+            </div>
+
+            <h4>Significado de las variables</h4>
+            <ul>
+                <li>\(\tau\): esfuerzo cortante</li>
+                <li>\(\gamma\): deformación angular o cortante</li>
+                <li>\(G\): módulo de rigidez o módulo cortante del material</li>
+            </ul>
+
+            <p>La relación entre \(G\), \(E\) y \(\nu\) es:</p>
+
+            <div class="equation">
+                \[
+                G = \frac{E}{2(1+\nu)}
+                \]
+            </div>
+
+            <h4>Significado de las variables</h4>
+            <ul>
+                <li>\(E\): módulo de Young</li>
+                <li>\(\nu\): coeficiente de Poisson</li>
+                <li>\(G\): módulo cortante, propiedad que describe la resistencia del material a deformarse por cortante</li>
+            </ul>
+
+            <div class="img-centro">
+                <div class="img-tooltip">
+                    <img src="Imagenes/torsion_eje_circular.png" alt="Eje circular sometido a torsión">
+                    <div class="tooltip-box">
+                        Imagen recuperada de:
+                        <br>
+                        <a href="https://lawebdeingeniosos.com/wp-content/uploads/2023/05/carga-01-1.png" target="_blank">
+                            https://lawebdeingeniosos.com/wp-content/uploads/2023/05/carga-01-1.png
+                        </a>
+                    </div>
+                </div>
+                <div class="pie-imagen">
+                    Figura 4. Eje circular sometido a torsión: el esfuerzo cortante máximo aparece en la superficie y está
+                    asociado a una deformación angular \(\gamma\).
+                </div>
+            </div>
+
+            <!-- TABLA RESUMEN -->
+            <h4>Resumen de relaciones elásticas vistas</h4>
+
+            <table class="tabla-resumen">
+                <thead>
+                    <tr>
+                        <th>Tipo de relación</th>
+                        <th>Ecuación representativa</th>
+                        <th>Variables principales</th>
+                        <th>Aplicación típica</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Unidimensional</td>
+                        <td>\(\sigma = E\,\varepsilon\)</td>
+                        <td>\(\sigma\), \(\varepsilon\), \(E\)</td>
+                        <td>Barras traccionadas o comprimidas en un solo eje.</td>
+                    </tr>
+                    <tr>
+                        <td>Generalizada en 3D</td>
+                        <td>\(\varepsilon_i = \dfrac{1}{E}\bigl(\sigma_i - \nu(\sigma_j+\sigma_k)\bigr)\)</td>
+                        <td>\(\sigma_x,\sigma_y,\sigma_z,\varepsilon_x,\varepsilon_y,\varepsilon_z,\nu\)</td>
+                        <td>Estado multiaxial de esfuerzos en sólidos isotrópicos.</td>
+                    </tr>
+                    <tr>
+                        <td>Cortante</td>
+                        <td>\(\tau = G\,\gamma\)</td>
+                        <td>\(\tau\), \(\gamma\), \(G\)</td>
+                        <td>Ejes a torsión, elementos sometidos a cortante puro.</td>
+                    </tr>
+                    <tr>
+                        <td>Volumétrica</td>
+                        <td>\(\varepsilon_v = \varepsilon_x+\varepsilon_y+\varepsilon_z\)</td>
+                        <td>\(\varepsilon_v\), \(\varepsilon_x,\varepsilon_y,\varepsilon_z\)</td>
+                        <td>Cargas hidrostáticas, compresibilidad del material.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- 2.5 -->
+            <h3>2.5. Ley de Hooke en forma matricial</h3>
+
+            <div class="equation">
+                \[
+                \{\sigma\} = [D]\{\varepsilon\}
+                \]
+            </div>
+
+            <h4>Significado de las variables</h4>
+            <ul>
+                <li>\(\{\sigma\}\): vector columna de esfuerzos</li>
+                <li>\(\{\varepsilon\}\): vector columna de deformaciones</li>
+                <li>\([D]\): matriz constitutiva del material (contiene las propiedades elásticas)</li>
+            </ul>
+
+            <p>
+                Esta formulación es utilizada en métodos numéricos, como el Método de Elemento Finito.
+            </p>
+
+            <!-- 2.6 -->
+            <h3>2.6. Deformación volumétrica</h3>
+
+            <div class="equation">
+                \[
+                \varepsilon_v = \varepsilon_x + \varepsilon_y + \varepsilon_z
+                \]
+            </div>
+
+            <h4>Significado de las variables</h4>
+            <ul>
+                <li>\(\varepsilon_v\): deformación volumétrica</li>
+                <li>\(\varepsilon_x, \varepsilon_y, \varepsilon_z\): deformaciones normales en los tres ejes</li>
+            </ul>
+
+            <p>Para cargas hidrostáticas:</p>
+
+            <div class="equation">
+                \[
+                \varepsilon_v = \frac{1 - 2\nu}{E}\,(\sigma_x + \sigma_y + \sigma_z)
+                \]
+            </div>
+
+            <h4>Significado de las variables</h4>
+            <ul>
+                <li>\(\nu\): coeficiente de Poisson</li>
+                <li>\(E\): módulo de Young</li>
+                <li>\(\sigma_x + \sigma_y + \sigma_z\): suma de esfuerzos normales en cada eje</li>
+            </ul>
+
+            <!-- 2.7 -->
+            <h3>2.7. Materiales anisotrópicos</h3>
+
+            <p>
+                Los materiales anisotrópicos presentan propiedades mecánicas distintas según la dirección en la que se
+                apliquen los esfuerzos. En lugar de un módulo de Young único, existen diferentes módulos para distintas
+                direcciones, así como diferentes coeficientes de Poisson.
+            </p>
+
+            <p>
+                Ejemplos: compuestos de fibra, madera, metales laminados, polímeros orientados. Estos materiales requieren
+                un conjunto mayor de constantes para describir su comportamiento elástico. En la siguiente figura se compara
+                un arreglo anisotrópico en capas con un material isotrópico uniforme.
+            </p>
+
+            <div class="img-centro">
+                <div class="img-tooltip">
+                    <img src="Imagenes/material_anisotropico_fibras.png"
+                        alt="Comparación entre estructura anisotrópica e isotrópica">
+                    <div class="tooltip-box">
+                        Imagen recuperada de:
+                        <br>
+                        <a href="https://www.researchgate.net/publication/326780343/figure/fig1/AS:11431281207863077@1701349093215/The-difference-between-anisotropic-and-isotropic-surfaces-a-Anisotropic-surfaces-have.tif"
+                            target="_blank">
+                            https://www.researchgate.net/.../The-difference-between-anisotropic-and-isotropic-surfaces...
+                        </a>
+                    </div>
+                </div>
+                <div class="pie-imagen">
+                    Figura 5. Comparación entre (a) una estructura anisotrópica en capas y (b) una estructura isotrópica
+                    uniforme.
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. ACTIVIDADES -->
+        <section id="actividades">
+            <h2>3. Actividades</h2>
+
+            <!-- ACTIVIDAD 1 -->
+            <h3>ACTIVIDAD 1 – Deformación tridimensional en un sólido isotrópico</h3>
+
+            <h4>Enunciado</h4>
+            <p>
+                Un cubo de aluminio está sometido a esfuerzos normales en las tres direcciones del espacio. Determina las
+                deformaciones en cada eje y la deformación volumétrica total.
+            </p>
+
+            <h4>Datos</h4>
+
+            <div class="equation">
+                \[
+                \sigma_x = 120 \text{ MPa}, \quad
+                \sigma_y = 30 \text{ MPa}, \quad
+                \sigma_z = 0
+                \]
+            </div>
+
+            <ul>
+                <li>\(\sigma_x, \sigma_y, \sigma_z\): esfuerzos aplicados</li>
+            </ul>
+
+            <div class="equation">
+                \[
+                E = 70 \text{ GPa}, \quad
+                \nu = 0.33
+                \]
+            </div>
+
+            <ul>
+                <li>\(E\): módulo de Young</li>
+                <li>\(\nu\): coeficiente de Poisson</li>
+            </ul>
+
+            <h4>Procedimiento</h4>
+            <button class="btn-proc" onclick="toggleProcedimiento(this)">Ver procedimiento</button>
+
+            <div class="procedimiento">
                 <ol>
-                    <!-- PREGUNTA 1 -->
                     <li>
-                        <strong>1. Esfuerzo y deformación uniaxial</strong><br>
-                        Una barra de acero con módulo de Young
-                        \(E = 200 \text{ GPa}\) se somete a un esfuerzo normal de \(100 \text{ MPa}\).<br>
-                        ¿Cuál es la deformación resultante?
-
-                        <div class="opciones" data-pregunta="1">
-                            <label class="opcion-label">
-                                <input type="radio" name="q1" data-correct="true">
-                                \(5 \times 10^{-4}\)
-                            </label>
-                            <label class="opcion-label">
-                                <input type="radio" name="q1">
-                                \(2 \times 10^{-4}\)
-                            </label>
-                            <label class="opcion-label">
-                                <input type="radio" name="q1">
-                                \(1 \times 10^{-3}\)
-                            </label>
-                            <label class="opcion-label">
-                                <input type="radio" name="q1">
-                                \(1 \times 10^{-2}\)
-                            </label>
-                        </div>
-                    </li>
-
-                    <!-- PREGUNTA 2 -->
-                    <li>
-                        <strong>2. Efecto Poisson</strong><br>
-                        Un elemento estructural experimenta una deformación longitudinal de \(0.002\).<br>
-                        El coeficiente de Poisson del material es \(\nu = 0.3\).<br>
-                        ¿Cuál es la deformación transversal aproximada?
-
-                        <div class="opciones" data-pregunta="2">
-                            <label class="opcion-label">
-                                <input type="radio" name="q2" data-correct="true">
-                                \(-0.0006\)
-                            </label>
-                            <label class="opcion-label">
-                                <input type="radio" name="q2">
-                                \(-0.002\)
-                            </label>
-                            <label class="opcion-label">
-                                <input type="radio" name="q2">
-                                \(-0.0003\)
-                            </label>
-                            <label class="opcion-label">
-                                <input type="radio" name="q2">
-                                \(0.0006\)
-                            </label>
-                        </div>
-                    </li>
-
-                    <!-- PREGUNTA 3 -->
-                    <li>
-                        <strong>3. Relación entre módulos elásticos</strong><br>
-                        Para un material con \(E = 150 \text{ GPa}\) y \(\nu = 0.25\), ¿cuál es el valor aproximado del
-                        módulo cortante \(G\)?
-
-                        <div class="opciones" data-pregunta="3">
-                            <label class="opcion-label">
-                                <input type="radio" name="q3">
-                                \(30 \text{ GPa}\)
-                            </label>
-                            <label class="opcion-label">
-                                <input type="radio" name="q3">
-                                \(50 \text{ GPa}\)
-                            </label>
-                            <label class="opcion-label">
-                                <input type="radio" name="q3" data-correct="true">
-                                \(60 \text{ GPa}\)
-                            </label>
-                            <label class="opcion-label">
-                                <input type="radio" name="q3">
-                                \(75 \text{ GPa}\)
-                            </label>
-                        </div>
-                    </li>
-
-                    <!-- PREGUNTA 4 -->
-                    <li>
-                        <strong>4. Deformación volumétrica bajo carga hidrostática</strong><br>
-                        Un sólido isotrópico con \(E = 210 \text{ GPa}\) y \(\nu = 0.28\) se somete a esfuerzos iguales
-                        en las tres direcciones:
+                        <p><strong>Convertir el módulo:</strong></p>
                         <div class="equation">
                             \[
-                            \sigma_x = \sigma_y = \sigma_z = 40 \text{ MPa}
+                            70 \text{ GPa} = 70\,000 \text{ MPa}
                             \]
-                        </div>
-                        ¿Cuál es la deformación volumétrica aproximada?
-
-                        <div class="opciones" data-pregunta="4">
-                            <label class="opcion-label">
-                                <input type="radio" name="q4" data-correct="true">
-                                \(4.8 \times 10^{-4}\)
-                            </label>
-                            <label class="opcion-label">
-                                <input type="radio" name="q4">
-                                \(2.0 \times 10^{-4}\)
-                            </label>
-                            <label class="opcion-label">
-                                <input type="radio" name="q4">
-                                \(1.6 \times 10^{-4}\)
-                            </label>
-                            <label class="opcion-label">
-                                <input type="radio" name="q4">
-                                \(3.0 \times 10^{-4}\)
-                            </label>
                         </div>
                     </li>
 
-                    <!-- PREGUNTA 5 -->
                     <li>
-                        <strong>5. Deformación en un material anisotrópico</strong><br>
-                        Una placa compuesta tiene módulo longitudinal \(E_L = 100 \text{ GPa}\) y módulo transversal
-                        \(E_T = 5 \text{ GPa}\). Si se aplica una tensión de \(50 \text{ MPa}\) en la
-                        <strong>dirección transversal</strong>, ¿cuál es la deformación aproximada en esa dirección?
+                        <p><strong>Usar la ecuación generalizada para cada eje:</strong></p>
+                        <div class="equation">
+                            \[
+                            \varepsilon_x = \frac{\sigma_x - \nu(\sigma_y + \sigma_z)}{E}
+                            \]
+                            \[
+                            \varepsilon_y = \frac{\sigma_y - \nu(\sigma_x + \sigma_z)}{E}
+                            \]
+                            \[
+                            \varepsilon_z = \frac{\sigma_z - \nu(\sigma_x + \sigma_y)}{E}
+                            \]
+                        </div>
+                    </li>
 
-                        <div class="opciones" data-pregunta="5">
-                            <label class="opcion-label">
-                                <input type="radio" name="q5">
-                                \(0.001\)
-                            </label>
-                            <label class="opcion-label">
-                                <input type="radio" name="q5">
-                                \(0.005\)
-                            </label>
-                            <label class="opcion-label">
-                                <input type="radio" name="q5" data-correct="true">
-                                \(0.010\)
-                            </label>
-                            <label class="opcion-label">
-                                <input type="radio" name="q5">
-                                \(0.050\)
-                            </label>
+                    <li>
+                        <p><strong>Sustituir valores:</strong></p>
+                        <div class="equation">
+                            \[
+                            \varepsilon_x =
+                            \frac{120 - 0.33(30)}{70\,000}
+                            \approx 1.57 \times 10^{-3}
+                            \]
+                            \[
+                            \varepsilon_y =
+                            \frac{30 - 0.33(120)}{70\,000}
+                            \approx -1.37 \times 10^{-4}
+                            \]
+                            \[
+                            \varepsilon_z =
+                            \frac{-0.33(120 + 30)}{70\,000}
+                            \approx -7.07 \times 10^{-4}
+                            \]
+                        </div>
+                    </li>
+
+                    <li>
+                        <p><strong>Deformación volumétrica:</strong></p>
+                        <div class="equation">
+                            \[
+                            \varepsilon_v = \varepsilon_x + \varepsilon_y + \varepsilon_z
+                            \approx 7.29 \times 10^{-4}
+                            \]
                         </div>
                     </li>
                 </ol>
+            </div>
 
-                <div style="text-align:center; margin-top:10px;">
-                    <button class="btn" onclick="verificarCuestionario()">Verificar respuestas</button>
-                </div>
+            <!-- ACTIVIDAD 2 -->
+            <h3>ACTIVIDAD 2 – Esfuerzo cortante y deformación angular en torsión</h3>
 
-                <p id="resultadoCuestionario" class="resultado-test"></p>
+            <h4>Enunciado</h4>
+            <p>
+                Un eje circular de acero transmite un momento de torsión. Determina el esfuerzo cortante máximo y la deformación
+                angular.
+            </p>
 
-                <div style="text-align:center; margin-top:15px;">
-                    <button class="btn" onclick="cerrarModal('modalCuestionario')">Cerrar</button>
+            <h4>Datos</h4>
+
+            <div class="equation">
+                \[
+                T = 600\,\text{N}\cdot\text{m}
+                \]
+            </div>
+            <ul>
+                <li>\(T\): momento de torsión aplicado</li>
+            </ul>
+
+            <div class="equation">
+                \[
+                d = 40 \text{ mm}
+                \]
+            </div>
+            <ul>
+                <li>\(d\): diámetro del eje</li>
+            </ul>
+
+            <div class="equation">
+                \[
+                G = 80 \text{ GPa}
+                \]
+            </div>
+            <ul>
+                <li>\(G\): módulo de rigidez</li>
+            </ul>
+
+            <h4>Procedimiento</h4>
+            <button class="btn-proc" onclick="toggleProcedimiento(this)">Ver procedimiento</button>
+
+            <div class="procedimiento">
+                <ol>
+                    <li>
+                        <p><strong>Convertir unidades:</strong></p>
+                        <div class="equation">
+                            \[
+                            d = 0.04 \text{ m}
+                            \]
+                            \[
+                            G = 80\,000 \text{ MPa}
+                            \]
+                        </div>
+                    </li>
+
+                    <li>
+                        <p><strong>Momento polar de inercia:</strong></p>
+                        <div class="equation">
+                            \[
+                            J = \frac{\pi d^{4}}{32}
+                            \]
+                            \[
+                            J = 2.01 \times 10^{-7} \text{ m}^{4}
+                            \]
+                        </div>
+                        <ul>
+                            <li>\(J\): momento polar de inercia</li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <p><strong>Radio:</strong></p>
+                        <div class="equation">
+                            \[
+                            r = \frac{d}{2} = 0.02 \text{ m}
+                            \]
+                        </div>
+                        <ul>
+                            <li>\(r\): radio</li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <p><strong>Esfuerzo cortante máximo:</strong></p>
+                        <div class="equation">
+                            \[
+                            \tau_{\max} = \frac{T\,r}{J}
+                            \]
+                            \[
+                            \tau_{\max} \approx 59.7 \text{ MPa}
+                            \]
+                        </div>
+                        <ul>
+                            <li>\(\tau_{\max}\): esfuerzo cortante máximo</li>
+                            <li>\(T\): torque</li>
+                            <li>\(J\): momento polar de inercia</li>
+                            <li>\(r\): radio</li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <p><strong>Deformación cortante:</strong></p>
+                        <div class="equation">
+                            \[
+                            \gamma = \frac{\tau}{G}
+                            \]
+                        </div>
+                        <ul>
+                            <li>\(\gamma\): deformación angular</li>
+                            <li>\(\tau\): esfuerzo cortante</li>
+                            <li>\(G\): módulo cortante</li>
+                        </ul>
+                    </li>
+                </ol>
+
+                <div class="equation">
+                    \[
+                    \gamma \approx 7.46 \times 10^{-4}
+                    \]
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- 4. BIBLIOGRAFÍA -->
-    <section id="fuentes">
-        <h2>4. Bibliografía</h2>
+            <!-- CUESTIONARIO -->
+            <h3>Cuestionario</h3>
 
-        <ul>
-            <li>
-                Beer, F. P., Johnston, E. R., DeWolf, J. T., &amp; Mazurek, D. (2016).
-                <em>Mecánica de materiales</em> (7.ª ed.). McGraw-Hill Education.
-            </li>
-            <li>
-                Hibbeler, R. C. (2018).
-                <em>Resistencia de materiales</em> (10.ª ed.). Pearson Educación.
-            </li>
-            <li>
-                Callister, W. D., &amp; Rethwisch, D. G. (2014).
-                <em>Ciencia e ingeniería de materiales</em> (9.ª ed.). John Wiley &amp; Sons.
-            </li>
-        </ul>
-    </section>
+            <div class="container">
+                <div class="box">
+                    <h3 style="color: var(--primario); text-align:left;">Cuestionario</h3>
+                    <button class="btn" onclick="abrirModal('modalCuestionario')">Ver ejercicios</button>
+                </div>
+            </div>
+
+            <div id="modalCuestionario" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="cerrarModal('modalCuestionario')">&times;</span>
+                    <h2 style="color: var(--primario); text-align:left;">Cuestionario</h2>
+
+                    <ol>
+                        <!-- PREGUNTA 1 -->
+                        <li>
+                            <strong>1. Esfuerzo y deformación uniaxial</strong><br>
+                            Una barra de acero con módulo de Young
+                            \(E = 200 \text{ GPa}\) se somete a un esfuerzo normal de \(100 \text{ MPa}\).<br>
+                            ¿Cuál es la deformación resultante?
+
+                            <div class="opciones" data-pregunta="1">
+                                <label class="opcion-label">
+                                    <input type="radio" name="q1" data-correct="true">
+                                    \(5 \times 10^{-4}\)
+                                </label>
+                                <label class="opcion-label">
+                                    <input type="radio" name="q1">
+                                    \(2 \times 10^{-4}\)
+                                </label>
+                                <label class="opcion-label">
+                                    <input type="radio" name="q1">
+                                    \(1 \times 10^{-3}\)
+                                </label>
+                                <label class="opcion-label">
+                                    <input type="radio" name="q1">
+                                    \(1 \times 10^{-2}\)
+                                </label>
+                            </div>
+                        </li>
+
+                        <!-- PREGUNTA 2 -->
+                        <li>
+                            <strong>2. Efecto Poisson</strong><br>
+                            Un elemento estructural experimenta una deformación longitudinal de \(0.002\).<br>
+                            El coeficiente de Poisson del material es \(\nu = 0.3\).<br>
+                            ¿Cuál es la deformación transversal aproximada?
+
+                            <div class="opciones" data-pregunta="2">
+                                <label class="opcion-label">
+                                    <input type="radio" name="q2" data-correct="true">
+                                    \(-0.0006\)
+                                </label>
+                                <label class="opcion-label">
+                                    <input type="radio" name="q2">
+                                    \(-0.002\)
+                                </label>
+                                <label class="opcion-label">
+                                    <input type="radio" name="q2">
+                                    \(-0.0003\)
+                                </label>
+                                <label class="opcion-label">
+                                    <input type="radio" name="q2">
+                                    \(0.0006\)
+                                </label>
+                            </div>
+                        </li>
+
+                        <!-- PREGUNTA 3 -->
+                        <li>
+                            <strong>3. Relación entre módulos elásticos</strong><br>
+                            Para un material con \(E = 150 \text{ GPa}\) y \(\nu = 0.25\), ¿cuál es el valor aproximado del
+                            módulo cortante \(G\)?
+
+                            <div class="opciones" data-pregunta="3">
+                                <label class="opcion-label">
+                                    <input type="radio" name="q3">
+                                    \(30 \text{ GPa}\)
+                                </label>
+                                <label class="opcion-label">
+                                    <input type="radio" name="q3">
+                                    \(50 \text{ GPa}\)
+                                </label>
+                                <label class="opcion-label">
+                                    <input type="radio" name="q3" data-correct="true">
+                                    \(60 \text{ GPa}\)
+                                </label>
+                                <label class="opcion-label">
+                                    <input type="radio" name="q3">
+                                    \(75 \text{ GPa}\)
+                                </label>
+                            </div>
+                        </li>
+
+                        <!-- PREGUNTA 4 -->
+                        <li>
+                            <strong>4. Deformación volumétrica bajo carga hidrostática</strong><br>
+                            Un sólido isotrópico con \(E = 210 \text{ GPa}\) y \(\nu = 0.28\) se somete a esfuerzos iguales
+                            en las tres direcciones:
+                            <div class="equation">
+                                \[
+                                \sigma_x = \sigma_y = \sigma_z = 40 \text{ MPa}
+                                \]
+                            </div>
+                            ¿Cuál es la deformación volumétrica aproximada?
+
+                            <div class="opciones" data-pregunta="4">
+                                <label class="opcion-label">
+                                    <input type="radio" name="q4" data-correct="true">
+                                    \(4.8 \times 10^{-4}\)
+                                </label>
+                                <label class="opcion-label">
+                                    <input type="radio" name="q4">
+                                    \(2.0 \times 10^{-4}\)
+                                </label>
+                                <label class="opcion-label">
+                                    <input type="radio" name="q4">
+                                    \(1.6 \times 10^{-4}\)
+                                </label>
+                                <label class="opcion-label">
+                                    <input type="radio" name="q4">
+                                    \(3.0 \times 10^{-4}\)
+                                </label>
+                            </div>
+                        </li>
+
+                        <!-- PREGUNTA 5 -->
+                        <li>
+                            <strong>5. Deformación en un material anisotrópico</strong><br>
+                            Una placa compuesta tiene módulo longitudinal \(E_L = 100 \text{ GPa}\) y módulo transversal
+                            \(E_T = 5 \text{ GPa}\). Si se aplica una tensión de \(50 \text{ MPa}\) en la
+                            <strong>dirección transversal</strong>, ¿cuál es la deformación aproximada en esa dirección?
+
+                            <div class="opciones" data-pregunta="5">
+                                <label class="opcion-label">
+                                    <input type="radio" name="q5">
+                                    \(0.001\)
+                                </label>
+                                <label class="opcion-label">
+                                    <input type="radio" name="q5">
+                                    \(0.005\)
+                                </label>
+                                <label class="opcion-label">
+                                    <input type="radio" name="q5" data-correct="true">
+                                    \(0.010\)
+                                </label>
+                                <label class="opcion-label">
+                                    <input type="radio" name="q5">
+                                    \(0.050\)
+                                </label>
+                            </div>
+                        </li>
+                    </ol>
+
+                    <div style="text-align:center; margin-top:10px;">
+                        <button class="btn" onclick="verificarCuestionario()">Verificar respuestas</button>
+                    </div>
+
+                    <p id="resultadoCuestionario" class="resultado-test"></p>
+
+                    <div style="text-align:center; margin-top:15px;">
+                        <button class="btn" onclick="cerrarModal('modalCuestionario')">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. BIBLIOGRAFÍA -->
+        <section id="fuentes">
+            <h2>4. Bibliografía</h2>
+
+            <ul>
+                <li>
+                    Beer, F. P., Johnston, E. R., DeWolf, J. T., &amp; Mazurek, D. (2016).
+                    <em>Mecánica de materiales</em> (7.ª ed.). McGraw-Hill Education.
+                </li>
+                <li>
+                    Hibbeler, R. C. (2018).
+                    <em>Resistencia de materiales</em> (10.ª ed.). Pearson Educación.
+                </li>
+                <li>
+                    Callister, W. D., &amp; Rethwisch, D. G. (2014).
+                    <em>Ciencia e ingeniería de materiales</em> (9.ª ed.). John Wiley &amp; Sons.
+                </li>
+            </ul>
+        </section>
+
+    </div> <!-- FIN DE page-wrapper -->
 
     <!-- SCRIPTS -->
 
