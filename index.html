@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fundamentos de la Ley de Hooke Generalizada</title>
+
+    <!-- Fuente -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --gris-texto: #24323d;
+            --gris-fondo: #f4f5fb;
+            --primario: #005f73;
+            --secundario: #0a9396;
+            --acento: #ee9b00;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: var(--gris-fondo);
+            font-size: 16px;
+            color: var(--gris-texto);
+        }
+
+        /* MENÚ SUPERIOR */
+        nav.menu {
+            display: flex;
+            justify-content: center;
+            /* centrado */
+            gap: 40px;
+            padding: 20px 40px;
+            background: #ffffff;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+        }
+
+        nav.menu a {
+            text-decoration: none;
+            color: var(--gris-texto);
+            padding: 8px 12px;
+            font-size: 18px;
+            font-weight: 400;
+            transition: 0.2s ease;
+            border-radius: 6px;
+        }
+
+        nav.menu a:hover {
+            background: rgba(0, 95, 115, 0.08);
+        }
+
+        nav.menu a.activo {
+            border-bottom: 2px solid var(--primario);
+            font-weight: 600;
+        }
+
+        /* ================== BANNER ================== */
+        .hero-banner {
+            width: 100%;
+            height: 330px;
+            background-image: url("Imagenes/layer.png");
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            padding: 0 20px;
+        }
+
+        .hero-banner::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right,
+                    rgba(0, 0, 0, 0.55),
+                    rgba(0, 0, 0, 0.25),
+                    rgba(0, 0, 0, 0));
+            z-index: 1;
+        }
+
+        .hero-text {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-text h1 {
+            font-size: 55px;
+            font-weight: 800;
+            color: #ffffff;
+            text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.45);
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .hero-text h2 {
+            font-size: 30px;
+            font-weight: 700;
+            color: #00b4d8;
+            text-shadow: 0px 3px 8px rgba(0, 0, 0, 0.5);
+            margin: 0;
+        }
+
+        .hero-text h3 {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--acento);
+            text-shadow: 0px 3px 8px rgba(0, 0, 0, 0.5);
+            margin-top: 8px;
+        }
+
+        /* ================================================================ */
+
+        /* SECCIONES GENERALES */
+        section {
+            padding: 30px 60px;
+        }
+
+        /* el banner no lleva padding para que quede limpio a lo ancho */
+        #home {
+            padding: 0;
+        }
+
+        #introduccion,
+        #contenido,
+        #actividades,
+        #fuentes {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding-left: 40px;
+            padding-right: 40px;
+        }
+
+        #introduccion {
+            padding-bottom: 10px;
+        }
+
+        #contenido {
+            padding-top: 10px;
+        }
+
+        /* TÍTULOS Y SUBTÍTULOS A LA IZQUIERDA */
+        section h2 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--primario);
+            text-align: left;
+        }
+
+        section h3 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-top: 25px;
+            margin-bottom: 10px;
+            color: #182128;
+            text-align: left;
+        }
+
+        section h4 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-top: 18px;
+            margin-bottom: 8px;
+            color: #182128;
+            text-align: left;
+        }
+
+        /* TEXTO JUSTIFICADO */
+        p {
+            text-align: justify;
+            font-size: 16px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        ul,
+        ol {
+            font-size: 16px;
+            line-height: 1.6;
+            text-align: justify;
+            list-style-position: outside;
+            padding-left: 1.2em;
+        }
+
+        /* ECUACIONES */
+        .equation {
+            background-color: #f8f9fa;
+            padding: 12px 15px;
+            border-radius: 6px;
+            margin: 10px auto;
+            font-family: "Times New Roman", serif;
+            font-style: italic;
+            text-align: center;
+            border-left: 4px solid var(--secundario);
+            font-size: 17px;
+            max-width: 800px;
+        }
+
+        mjx-container[jax="CHTML"] {
+            font-size: 100%;
+        }
+
+        /* CONTENEDOR CUESTIONARIO */
+        .container {
+            width: 100%;
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .box {
+            background: #ffffff;
+            padding: 30px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 12px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+
+        .btn {
+            margin-top: 15px;
+            padding: 12px 25px;
+            font-size: 18px;
+            border: none;
+            background: var(--primario);
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #003f52;
+        }
+
+        /* BOTÓN Y CONTENEDOR PROCEDIMIENTO */
+        .btn-proc {
+            margin-top: 10px;
+            padding: 8px 20px;
+            font-size: 16px;
+            border: none;
+            background: var(--secundario);
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-proc:hover {
+            background: #066772;
+        }
+
+        .procedimiento {
+            display: none;
+            margin-top: 10px;
+        }
+
+        /* MODAL CUESTIONARIO */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 20;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .modal-content {
+            background: white;
+            padding: 25px;
+            width: 90%;
+            max-width: 900px;
+            margin: 80px auto;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            position: relative;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 25px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* OPCIONES MÚLTIPLE */
+        .opciones {
+            margin-top: 8px;
+            margin-bottom: 15px;
+        }
+
+        .opcion-label {
+            display: block;
+            margin: 3px 0;
+            cursor: pointer;
+        }
+
+        .opcion-label input {
+            margin-right: 6px;
+        }
+
+        .opcion-label.correcta {
+            color: #0c8c2b;
+            text-decoration: underline;
+            text-decoration-color: #0c8c2b;
+            text-decoration-thickness: 2px;
+        }
+
+        .opcion-label.incorrecta {
+            color: #c62828;
+            text-decoration: underline;
+            text-decoration-color: #c62828;
+            text-decoration-thickness: 2px;
+        }
+
+        .resultado-test {
+            text-align: center;
+            font-weight: 600;
+            margin-top: 15px;
+            font-size: 16px;
+        }
+
+        /* TABLAS */
+        .tabla-resumen,
+        .tabla-simple {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .tabla-resumen th,
+        .tabla-resumen td,
+        .tabla-simple th,
+        .tabla-simple td {
+            border: 1px solid #ddd;
+            padding: 8px 10px;
+            vertical-align: top;
+            font-size: 15px;
+        }
+
+        .tabla-resumen th,
+        .tabla-simple th {
+            background: #e3f2fd;
+            font-weight: 600;
+            text-align: left;
+        }
+
+        .tabla-resumen tr:nth-child(even),
+        .tabla-simple tr:nth-child(even) {
+            background: #fafafa;
+        }
+
+        .tabla-resumen tr:hover,
+        .tabla-simple tr:hover {
+            background-color: #d0e7ff;
+            cursor: pointer;
+        }
+
+        .fila-seleccionada {
+            background-color: #bbdefb !important;
+        }
+
+        /* IMÁGENES CENTRADAS + TOOLTIP */
+        .img-centro {
+            text-align: center;
+            margin: 18px 0;
+        }
+
+        .img-centro img {
+            max-width: 90%;
+            height: auto;
+            border-radius: 4px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18);
+        }
+
+        .pie-imagen {
+            font-size: 12px;
+            color: #555;
+            margin-top: 4px;
+            text-align: center;
+        }
+
+ .img-tooltip {
+    position: relative;
+    display: inline-block;   /* sólo ocupa el tamaño de la imagen */
+}
+
+/* TOOLTIP A LA DERECHA, CENTRADO EN ALTURA */
+.tooltip-box {
+    position: absolute;
+    top: 50%;                /* mitad de la imagen */
+    right: -10px;            /* pegado al borde derecho */
+    left: auto;
+    transform: translate(100%, -50%);  /* lo sacas hacia la derecha y lo centras verticalmente */
+
+    background: rgba(0, 0, 0, 0.85);
+    color: #ffffff;
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-size: 13px;
+    max-width: 280px;
+    text-align: left;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+    z-index: 50;
+
+    /* para que el texto y el link no se salgan */
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.tooltip-box a {
+    color: #90e0ef;
+    text-decoration: underline;
+    word-break: break-word;
+}
+
+.img-tooltip:hover .tooltip-box {
+    opacity: 1;
+}
+
+
+
+
+        /* RESPONSIVO */
+        @media (max-width: 768px) {
+            section {
+                padding: 20px 20px;
+            }
+
+            #introduccion,
+            #contenido,
+            #actividades,
+            #fuentes {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .hero-text h1 {
+                font-size: 34px;
+            }
+
+            .hero-text h2 {
+                font-size: 22px;
+            }
+
+            .hero-text h3 {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HOME / BANNER -->
+    <section id="home">
+        <div class="hero-banner">
+            <div class="hero-text">
+                <h1>Fundamentos de la Ley de Hooke Generalizada</h1>
+                <h2>Elementos de mecánica del medio continuo</h2>
+                <h3>Termofluidos</h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- MENÚ -->
+    <nav class="menu">
+        <a href="#home" class="activo">Home</a>
+        <a href="#introduccion">Introducción</a>
+        <a href="#contenido">Contenido</a>
+        <a href="#actividades">Actividades</a>
+        <a href="#fuentes">Bibliografía</a>
+    </nav>
+
+    <!-- ========= CONTENIDO SIN TARJETA CENTRAL (LIBRE) ========= -->
+
+    <!-- 1. INTRODUCCIÓN -->
+    <section id="introduccion">
+        <h2>1. Introducción</h2>
+
+        <p>
+            La Ley de Hooke generalizada describe cómo responde un sólido elástico cuando se le aplican cargas en
+            distintas direcciones. A diferencia de la forma uniaxial, esta versión considera el comportamiento
+            tridimensional del material, incluyendo la interacción entre esfuerzos normales, esfuerzos cortantes y las
+            deformaciones asociadas.
+        </p>
+
+        <p>
+            Comprender esta relación esfuerzo–deformación es esencial para analizar piezas sometidas a carga, predecir
+            cómo se deforman los sólidos y determinar los límites en los que un material conserva un comportamiento
+            elástico lineal. Esta ley constituye la base para el diseño mecánico, el análisis estructural y la
+            modelación matemática de componentes reales.
+        </p>
+
+        <!-- Imagen conceptual general -->
+        <div class="img-centro">
+            <div class="img-tooltip">
+                <img src="Imagenes/diagrama_esfuerzo_deformacion_general.png"
+                    alt="Diagrama esfuerzo-deformación uniaxial" style="max-width: 60%; height: auto;">
+                <div class="tooltip-box">
+                    Imagen recuperada de:
+                    <br>
+                    <a href="https://i.pinimg.com/564x/ec/0b/d2/ec0bd22b8747deaaacf92d3aa41d66d0.jpg" target="_blank">
+                        https://i.pinimg.com/564x/ec/0b/d2/ec0bd22b8747deaaacf92d3aa41d66d0.jpg
+                    </a>
+                </div>
+            </div>
+            <div class="pie-imagen">
+                Figura 1. Curva esfuerzo–deformación uniaxial típica.
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. CONTENIDO -->
+    <section id="contenido">
+        <h2>2. Contenido</h2>
+
+        <!-- 2.1 -->
+        <h3>2.1. Conceptos fundamentales</h3>
+
+        <table class="tabla-simple">
+            <thead>
+                <tr>
+                    <th>Concepto</th>
+                    <th>Definición</th>
+                    <th>Variable típica</th>
+                    <th>Unidades (SI)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Esfuerzo normal</td>
+                    <td>Fuerza interna distribuida sobre un área transversal.</td>
+                    <td>\(\sigma\)</td>
+                    <td>Pa (N/m²)</td>
+                </tr>
+                <tr>
+                    <td>Esfuerzo cortante</td>
+                    <td>Esfuerzo que actúa paralelo al área de corte.</td>
+                    <td>\(\tau\)</td>
+                    <td>Pa (N/m²)</td>
+                </tr>
+                <tr>
+                    <td>Deformación normal</td>
+                    <td>Cambio relativo de longitud respecto a la longitud inicial.</td>
+                    <td>\(\varepsilon\)</td>
+                    <td>– (adimensional)</td>
+                </tr>
+                <tr>
+                    <td>Deformación angular</td>
+                    <td>Cambio en el ángulo entre dos direcciones originalmente perpendiculares.</td>
+                    <td>\(\gamma\)</td>
+                    <td>rad (normalmente tratada como adimensional)</td>
+                </tr>
+                <tr>
+                    <td>Elasticidad</td>
+                    <td>Capacidad de recuperar la forma al retirar las cargas.</td>
+                    <td>–</td>
+                    <td>–</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- 2.2 -->
+        <h3>2.2. Ley de Hooke unidimensional</h3>
+
+        <div class="equation">
+            \[
+            \sigma = E\,\varepsilon
+            \]
+        </div>
+
+        <h4>Significado de las variables</h4>
+        <ul>
+            <li>\(\sigma\): esfuerzo normal aplicado</li>
+            <li>\(\varepsilon\): deformación normal resultante</li>
+            <li>\(E\): módulo de Young o módulo de elasticidad del material</li>
+        </ul>
+
+        <p>
+            En la versión unidimensional se supone que el elemento solo trabaja a lo largo de un eje
+            (por ejemplo, el eje \(x\)), de modo que los esfuerzos en las demás direcciones son despreciables. El estado
+            de esfuerzo se reduce entonces a un solo esfuerzo normal \(\sigma\) y a una sola deformación normal
+            \(\varepsilon\), por lo que la relación constitutiva del material se simplifica a la forma lineal
+            \(\sigma = E\,\varepsilon\).
+        </p>
+
+        <p>
+            Un caso muy sencillo donde se observa este comportamiento es el de un resorte ideal sometido a tensión o
+            compresión. En ese caso la fuerza aplicada \(F\) es proporcional al desplazamiento \(x\):
+        </p>
+
+        <div class="equation">
+            \[
+            F = kx
+            \]
+        </div>
+
+        <p>
+            donde \(F\) es la fuerza axial aplicada, \(x\) es el alargamiento (o acortamiento) del resorte y \(k\) es la
+            constante elástica. Esta relación es análoga a \(\sigma = E\,\varepsilon\): en ambos modelos la respuesta
+            (deformación o desplazamiento) es directamente proporcional al nivel de carga mientras el material se
+            mantiene en la zona elástica.
+        </p>
+
+        <div class="img-centro">
+            <div class="img-tooltip">
+                <img src="Imagenes/diagrama_unidimensional.png"
+                    alt="Gráfica fuerza-desplazamiento para un resorte ideal">
+                <div class="tooltip-box">
+                    Imagen recuperada de:
+                    <br>
+                    <a href="https://cdn.fisimat.com.mx/wp-content/uploads/2015/09/Ley-de-Hooke.png" target="_blank">
+                        https://cdn.fisimat.com.mx/wp-content/uploads/2015/09/Ley-de-Hooke.png
+                    </a>
+                </div>
+            </div>
+            <div class="pie-imagen">
+                Figura 2. Relación lineal fuerza–desplazamiento de un resorte ideal (\(F = kx\)), análoga a la relación
+                esfuerzo–deformación uniaxial \(\sigma = E\,\varepsilon\).
+            </div>
+        </div>
+
+        <!-- 2.3 -->
+        <h3>2.3. Ley de Hooke Generalizada para sólidos isotrópicos</h3>
+
+        <div class="equation">
+            \[
+            \varepsilon_x = \frac{1}{E}\,\bigl(\sigma_x - \nu(\sigma_y + \sigma_z)\bigr)
+            \]
+            \[
+            \varepsilon_y = \frac{1}{E}\,\bigl(\sigma_y - \nu(\sigma_x + \sigma_z)\bigr)
+            \]
+            \[
+            \varepsilon_z = \frac{1}{E}\,\bigl(\sigma_z - \nu(\sigma_x + \sigma_y)\bigr)
+            \]
+        </div>
+
+        <h4>Significado de las variables</h4>
+        <ul>
+            <li>\(\varepsilon_x, \varepsilon_y, \varepsilon_z\): deformaciones normales en los ejes \(x\), \(y\) y \(z\)
+            </li>
+            <li>\(\sigma_x, \sigma_y, \sigma_z\): esfuerzos normales aplicados en las direcciones \(x\), \(y\) y \(z\)</li>
+            <li>\(E\): módulo de Young</li>
+            <li>\(\nu\): coeficiente de Poisson (relaciona la deformación transversal con la longitudinal)</li>
+        </ul>
+
+        <div class="img-centro">
+            <div class="img-tooltip">
+                <img src="Imagenes/cubo_esfuerzos_normales.png"
+                    alt="Cubo sometido a esfuerzos σx, σy y σz">
+                <div class="tooltip-box">
+                    Imagen recuperada de:
+                    <br>
+                    <a href="https://caeflow.com/wp-content/uploads/2025/07/3d-mohr-circle-calculator.png"
+                        target="_blank">
+                        https://caeflow.com/wp-content/uploads/2025/07/3d-mohr-circle-calculator.png
+                    </a>
+                </div>
+            </div>
+            <div class="pie-imagen">
+                Figura 3. Elemento cúbico sometido a esfuerzos normales en las tres direcciones principales,
+                representando un estado multiaxial de esfuerzo en un sólido isotrópico.
+            </div>
+        </div>
+
+        <p>
+            Estas ecuaciones indican que la deformación en un eje depende del esfuerzo en ese mismo eje y también de los
+            esfuerzos en los ejes perpendiculares.
+        </p>
+
+        <!-- 2.4 -->
+        <h3>2.4. Esfuerzos cortantes y módulo de rigidez</h3>
+
+        <div class="equation">
+            \[
+            \tau = G\,\gamma
+            \]
+        </div>
+
+        <h4>Significado de las variables</h4>
+        <ul>
+            <li>\(\tau\): esfuerzo cortante</li>
+            <li>\(\gamma\): deformación angular o cortante</li>
+            <li>\(G\): módulo de rigidez o módulo cortante del material</li>
+        </ul>
+
+        <p>La relación entre \(G\), \(E\) y \(\nu\) es:</p>
+
+        <div class="equation">
+            \[
+            G = \frac{E}{2(1+\nu)}
+            \]
+        </div>
+
+        <h4>Significado de las variables</h4>
+        <ul>
+            <li>\(E\): módulo de Young</li>
+            <li>\(\nu\): coeficiente de Poisson</li>
+            <li>\(G\): módulo cortante, propiedad que describe la resistencia del material a deformarse por cortante</li>
+        </ul>
+
+        <div class="img-centro">
+            <div class="img-tooltip">
+                <img src="Imagenes/torsion_eje_circular.png" alt="Eje circular sometido a torsión">
+                <div class="tooltip-box">
+                    Imagen recuperada de:
+                    <br>
+                    <a href="https://lawebdeingeniosos.com/wp-content/uploads/2023/05/carga-01-1.png" target="_blank">
+                        https://lawebdeingeniosos.com/wp-content/uploads/2023/05/carga-01-1.png
+                    </a>
+                </div>
+            </div>
+            <div class="pie-imagen">
+                Figura 4. Eje circular sometido a torsión: el esfuerzo cortante máximo aparece en la superficie y está
+                asociado a una deformación angular \(\gamma\).
+            </div>
+        </div>
+
+        <!-- TABLA RESUMEN -->
+        <h4>Resumen de relaciones elásticas vistas</h4>
+
+        <table class="tabla-resumen">
+            <thead>
+                <tr>
+                    <th>Tipo de relación</th>
+                    <th>Ecuación representativa</th>
+                    <th>Variables principales</th>
+                    <th>Aplicación típica</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Unidimensional</td>
+                    <td>\(\sigma = E\,\varepsilon\)</td>
+                    <td>\(\sigma\), \(\varepsilon\), \(E\)</td>
+                    <td>Barras traccionadas o comprimidas en un solo eje.</td>
+                </tr>
+                <tr>
+                    <td>Generalizada en 3D</td>
+                    <td>\(\varepsilon_i = \dfrac{1}{E}\bigl(\sigma_i - \nu(\sigma_j+\sigma_k)\bigr)\)</td>
+                    <td>\(\sigma_x,\sigma_y,\sigma_z,\varepsilon_x,\varepsilon_y,\varepsilon_z,\nu\)</td>
+                    <td>Estado multiaxial de esfuerzos en sólidos isotrópicos.</td>
+                </tr>
+                <tr>
+                    <td>Cortante</td>
+                    <td>\(\tau = G\,\gamma\)</td>
+                    <td>\(\tau\), \(\gamma\), \(G\)</td>
+                    <td>Ejes a torsión, elementos sometidos a cortante puro.</td>
+                </tr>
+                <tr>
+                    <td>Volumétrica</td>
+                    <td>\(\varepsilon_v = \varepsilon_x+\varepsilon_y+\varepsilon_z\)</td>
+                    <td>\(\varepsilon_v\), \(\varepsilon_x,\varepsilon_y,\varepsilon_z\)</td>
+                    <td>Cargas hidrostáticas, compresibilidad del material.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- 2.5 -->
+        <h3>2.5. Ley de Hooke en forma matricial</h3>
+
+        <div class="equation">
+            \[
+            \{\sigma\} = [D]\{\varepsilon\}
+            \]
+        </div>
+
+        <h4>Significado de las variables</h4>
+        <ul>
+            <li>\(\{\sigma\}\): vector columna de esfuerzos</li>
+            <li>\(\{\varepsilon\}\): vector columna de deformaciones</li>
+            <li>\([D]\): matriz constitutiva del material (contiene las propiedades elásticas)</li>
+        </ul>
+
+        <p>
+            Esta formulación es utilizada en métodos numéricos, como el Método de Elemento Finito.
+        </p>
+
+        <!-- 2.6 -->
+        <h3>2.6. Deformación volumétrica</h3>
+
+        <div class="equation">
+            \[
+            \varepsilon_v = \varepsilon_x + \varepsilon_y + \varepsilon_z
+            \]
+        </div>
+
+        <h4>Significado de las variables</h4>
+        <ul>
+            <li>\(\varepsilon_v\): deformación volumétrica</li>
+            <li>\(\varepsilon_x, \varepsilon_y, \varepsilon_z\): deformaciones normales en los tres ejes</li>
+        </ul>
+
+        <p>Para cargas hidrostáticas:</p>
+
+        <div class="equation">
+            \[
+            \varepsilon_v = \frac{1 - 2\nu}{E}\,(\sigma_x + \sigma_y + \sigma_z)
+            \]
+        </div>
+
+        <h4>Significado de las variables</h4>
+        <ul>
+            <li>\(\nu\): coeficiente de Poisson</li>
+            <li>\(E\): módulo de Young</li>
+            <li>\(\sigma_x + \sigma_y + \sigma_z\): suma de esfuerzos normales en cada eje</li>
+        </ul>
+
+        <!-- 2.7 -->
+        <h3>2.7. Materiales anisotrópicos</h3>
+
+        <p>
+            Los materiales anisotrópicos presentan propiedades mecánicas distintas según la dirección en la que se
+            apliquen los esfuerzos. En lugar de un módulo de Young único, existen diferentes módulos para distintas
+            direcciones, así como diferentes coeficientes de Poisson.
+        </p>
+
+        <p>
+            Ejemplos: compuestos de fibra, madera, metales laminados, polímeros orientados. Estos materiales requieren
+            un conjunto mayor de constantes para describir su comportamiento elástico. En la siguiente figura se compara
+            un arreglo anisotrópico en capas con un material isotrópico uniforme.
+        </p>
+
+        <div class="img-centro">
+            <div class="img-tooltip">
+                <img src="Imagenes/material_anisotropico_fibras.png"
+                    alt="Comparación entre estructura anisotrópica e isotrópica">
+                <div class="tooltip-box">
+                    Imagen recuperada de:
+                    <br>
+                    <a href="https://www.researchgate.net/publication/326780343/figure/fig1/AS:11431281207863077@1701349093215/The-difference-between-anisotropic-and-isotropic-surfaces-a-Anisotropic-surfaces-have.tif"
+                        target="_blank">
+                        https://www.researchgate.net/.../The-difference-between-anisotropic-and-isotropic-surfaces...
+                    </a>
+                </div>
+            </div>
+            <div class="pie-imagen">
+                Figura 5. Comparación entre (a) una estructura anisotrópica en capas y (b) una estructura isotrópica
+                uniforme.
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. ACTIVIDADES -->
+    <section id="actividades">
+        <h2>3. Actividades</h2>
+
+        <!-- ACTIVIDAD 1 -->
+        <h3>ACTIVIDAD 1 – Deformación tridimensional en un sólido isotrópico</h3>
+
+        <h4>Enunciado</h4>
+        <p>
+            Un cubo de aluminio está sometido a esfuerzos normales en las tres direcciones del espacio. Determina las
+            deformaciones en cada eje y la deformación volumétrica total.
+        </p>
+
+        <h4>Datos</h4>
+
+        <div class="equation">
+            \[
+            \sigma_x = 120 \text{ MPa}, \quad
+            \sigma_y = 30 \text{ MPa}, \quad
+            \sigma_z = 0
+            \]
+        </div>
+
+        <ul>
+            <li>\(\sigma_x, \sigma_y, \sigma_z\): esfuerzos aplicados</li>
+        </ul>
+
+        <div class="equation">
+            \[
+            E = 70 \text{ GPa}, \quad
+            \nu = 0.33
+            \]
+        </div>
+
+        <ul>
+            <li>\(E\): módulo de Young</li>
+            <li>\(\nu\): coeficiente de Poisson</li>
+        </ul>
+
+        <h4>Procedimiento</h4>
+        <button class="btn-proc" onclick="toggleProcedimiento(this)">Ver procedimiento</button>
+
+        <div class="procedimiento">
+            <ol>
+                <li>
+                    <p><strong>Convertir el módulo:</strong></p>
+                    <div class="equation">
+                        \[
+                        70 \text{ GPa} = 70\,000 \text{ MPa}
+                        \]
+                    </div>
+                </li>
+
+                <li>
+                    <p><strong>Usar la ecuación generalizada para cada eje:</strong></p>
+                    <div class="equation">
+                        \[
+                        \varepsilon_x = \frac{\sigma_x - \nu(\sigma_y + \sigma_z)}{E}
+                        \]
+                        \[
+                        \varepsilon_y = \frac{\sigma_y - \nu(\sigma_x + \sigma_z)}{E}
+                        \]
+                        \[
+                        \varepsilon_z = \frac{\sigma_z - \nu(\sigma_x + \sigma_y)}{E}
+                        \]
+                    </div>
+                </li>
+
+                <li>
+                    <p><strong>Sustituir valores:</strong></p>
+                    <div class="equation">
+                        \[
+                        \varepsilon_x =
+                        \frac{120 - 0.33(30)}{70\,000}
+                        \approx 1.57 \times 10^{-3}
+                        \]
+                        \[
+                        \varepsilon_y =
+                        \frac{30 - 0.33(120)}{70\,000}
+                        \approx -1.37 \times 10^{-4}
+                        \]
+                        \[
+                        \varepsilon_z =
+                        \frac{-0.33(120 + 30)}{70\,000}
+                        \approx -7.07 \times 10^{-4}
+                        \]
+                    </div>
+                </li>
+
+                <li>
+                    <p><strong>Deformación volumétrica:</strong></p>
+                    <div class="equation">
+                        \[
+                        \varepsilon_v = \varepsilon_x + \varepsilon_y + \varepsilon_z
+                        \approx 7.29 \times 10^{-4}
+                        \]
+                    </div>
+                </li>
+            </ol>
+        </div>
+
+        <!-- ACTIVIDAD 2 -->
+        <h3>ACTIVIDAD 2 – Esfuerzo cortante y deformación angular en torsión</h3>
+
+        <h4>Enunciado</h4>
+        <p>
+            Un eje circular de acero transmite un momento de torsión. Determina el esfuerzo cortante máximo y la deformación
+            angular.
+        </p>
+
+        <h4>Datos</h4>
+
+        <div class="equation">
+            \[
+            T = 600\,\text{N}\cdot\text{m}
+            \]
+        </div>
+        <ul>
+            <li>\(T\): momento de torsión aplicado</li>
+        </ul>
+
+        <div class="equation">
+            \[
+            d = 40 \text{ mm}
+            \]
+        </div>
+        <ul>
+            <li>\(d\): diámetro del eje</li>
+        </ul>
+
+        <div class="equation">
+            \[
+            G = 80 \text{ GPa}
+            \]
+        </div>
+        <ul>
+            <li>\(G\): módulo de rigidez</li>
+        </ul>
+
+        <h4>Procedimiento</h4>
+        <button class="btn-proc" onclick="toggleProcedimiento(this)">Ver procedimiento</button>
+
+        <div class="procedimiento">
+            <ol>
+                <li>
+                    <p><strong>Convertir unidades:</strong></p>
+                    <div class="equation">
+                        \[
+                        d = 0.04 \text{ m}
+                        \]
+                        \[
+                        G = 80\,000 \text{ MPa}
+                        \]
+                    </div>
+                </li>
+
+                <li>
+                    <p><strong>Momento polar de inercia:</strong></p>
+                    <div class="equation">
+                        \[
+                        J = \frac{\pi d^{4}}{32}
+                        \]
+                        \[
+                        J = 2.01 \times 10^{-7} \text{ m}^{4}
+                        \]
+                    </div>
+                    <ul>
+                        <li>\(J\): momento polar de inercia</li>
+                    </ul>
+                </li>
+
+                <li>
+                    <p><strong>Radio:</strong></p>
+                    <div class="equation">
+                        \[
+                        r = \frac{d}{2} = 0.02 \text{ m}
+                        \]
+                    </div>
+                    <ul>
+                        <li>\(r\): radio</li>
+                    </ul>
+                </li>
+
+                <li>
+                    <p><strong>Esfuerzo cortante máximo:</strong></p>
+                    <div class="equation">
+                        \[
+                        \tau_{\max} = \frac{T\,r}{J}
+                        \]
+                        \[
+                        \tau_{\max} \approx 59.7 \text{ MPa}
+                        \]
+                    </div>
+                    <ul>
+                        <li>\(\tau_{\max}\): esfuerzo cortante máximo</li>
+                        <li>\(T\): torque</li>
+                        <li>\(J\): momento polar de inercia</li>
+                        <li>\(r\): radio</li>
+                    </ul>
+                </li>
+
+                <li>
+                    <p><strong>Deformación cortante:</strong></p>
+                    <div class="equation">
+                        \[
+                        \gamma = \frac{\tau}{G}
+                        \]
+                    </div>
+                    <ul>
+                        <li>\(\gamma\): deformación angular</li>
+                        <li>\(\tau\): esfuerzo cortante</li>
+                        <li>\(G\): módulo cortante</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <div class="equation">
+                \[
+                \gamma \approx 7.46 \times 10^{-4}
+                \]
+            </div>
+        </div>
+
+        <!-- CUESTIONARIO -->
+        <h3>Cuestionario</h3>
+
+        <div class="container">
+            <div class="box">
+                <h3 style="color: var(--primario); text-align:left;">Cuestionario</h3>
+                <button class="btn" onclick="abrirModal('modalCuestionario')">Ver ejercicios</button>
+            </div>
+        </div>
+
+        <div id="modalCuestionario" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="cerrarModal('modalCuestionario')">&times;</span>
+                <h2 style="color: var(--primario); text-align:left;">Cuestionario</h2>
+
+                <ol>
+                    <!-- PREGUNTA 1 -->
+                    <li>
+                        <strong>1. Esfuerzo y deformación uniaxial</strong><br>
+                        Una barra de acero con módulo de Young
+                        \(E = 200 \text{ GPa}\) se somete a un esfuerzo normal de \(100 \text{ MPa}\).<br>
+                        ¿Cuál es la deformación resultante?
+
+                        <div class="opciones" data-pregunta="1">
+                            <label class="opcion-label">
+                                <input type="radio" name="q1" data-correct="true">
+                                \(5 \times 10^{-4}\)
+                            </label>
+                            <label class="opcion-label">
+                                <input type="radio" name="q1">
+                                \(2 \times 10^{-4}\)
+                            </label>
+                            <label class="opcion-label">
+                                <input type="radio" name="q1">
+                                \(1 \times 10^{-3}\)
+                            </label>
+                            <label class="opcion-label">
+                                <input type="radio" name="q1">
+                                \(1 \times 10^{-2}\)
+                            </label>
+                        </div>
+                    </li>
+
+                    <!-- PREGUNTA 2 -->
+                    <li>
+                        <strong>2. Efecto Poisson</strong><br>
+                        Un elemento estructural experimenta una deformación longitudinal de \(0.002\).<br>
+                        El coeficiente de Poisson del material es \(\nu = 0.3\).<br>
+                        ¿Cuál es la deformación transversal aproximada?
+
+                        <div class="opciones" data-pregunta="2">
+                            <label class="opcion-label">
+                                <input type="radio" name="q2" data-correct="true">
+                                \(-0.0006\)
+                            </label>
+                            <label class="opcion-label">
+                                <input type="radio" name="q2">
+                                \(-0.002\)
+                            </label>
+                            <label class="opcion-label">
+                                <input type="radio" name="q2">
+                                \(-0.0003\)
+                            </label>
+                            <label class="opcion-label">
+                                <input type="radio" name="q2">
+                                \(0.0006\)
+                            </label>
+                        </div>
+                    </li>
+
+                    <!-- PREGUNTA 3 -->
+                    <li>
+                        <strong>3. Relación entre módulos elásticos</strong><br>
+                        Para un material con \(E = 150 \text{ GPa}\) y \(\nu = 0.25\), ¿cuál es el valor aproximado del
+                        módulo cortante \(G\)?
+
+                        <div class="opciones" data-pregunta="3">
+                            <label class="opcion-label">
+                                <input type="radio" name="q3">
+                                \(30 \text{ GPa}\)
+                            </label>
+                            <label class="opcion-label">
+                                <input type="radio" name="q3">
+                                \(50 \text{ GPa}\)
+                            </label>
+                            <label class="opcion-label">
+                                <input type="radio" name="q3" data-correct="true">
+                                \(60 \text{ GPa}\)
+                            </label>
+                            <label class="opcion-label">
+                                <input type="radio" name="q3">
+                                \(75 \text{ GPa}\)
+                            </label>
+                        </div>
+                    </li>
+
+                    <!-- PREGUNTA 4 -->
+                    <li>
+                        <strong>4. Deformación volumétrica bajo carga hidrostática</strong><br>
+                        Un sólido isotrópico con \(E = 210 \text{ GPa}\) y \(\nu = 0.28\) se somete a esfuerzos iguales
+                        en las tres direcciones:
+                        <div class="equation">
+                            \[
+                            \sigma_x = \sigma_y = \sigma_z = 40 \text{ MPa}
+                            \]
+                        </div>
+                        ¿Cuál es la deformación volumétrica aproximada?
+
+                        <div class="opciones" data-pregunta="4">
+                            <label class="opcion-label">
+                                <input type="radio" name="q4" data-correct="true">
+                                \(4.8 \times 10^{-4}\)
+                            </label>
+                            <label class="opcion-label">
+                                <input type="radio" name="q4">
+                                \(2.0 \times 10^{-4}\)
+                            </label>
+                            <label class="opcion-label">
+                                <input type="radio" name="q4">
+                                \(1.6 \times 10^{-4}\)
+                            </label>
+                            <label class="opcion-label">
+                                <input type="radio" name="q4">
+                                \(3.0 \times 10^{-4}\)
+                            </label>
+                        </div>
+                    </li>
+
+                    <!-- PREGUNTA 5 -->
+                    <li>
+                        <strong>5. Deformación en un material anisotrópico</strong><br>
+                        Una placa compuesta tiene módulo longitudinal \(E_L = 100 \text{ GPa}\) y módulo transversal
+                        \(E_T = 5 \text{ GPa}\). Si se aplica una tensión de \(50 \text{ MPa}\) en la
+                        <strong>dirección transversal</strong>, ¿cuál es la deformación aproximada en esa dirección?
+
+                        <div class="opciones" data-pregunta="5">
+                            <label class="opcion-label">
+                                <input type="radio" name="q5">
+                                \(0.001\)
+                            </label>
+                            <label class="opcion-label">
+                                <input type="radio" name="q5">
+                                \(0.005\)
+                            </label>
+                            <label class="opcion-label">
+                                <input type="radio" name="q5" data-correct="true">
+                                \(0.010\)
+                            </label>
+                            <label class="opcion-label">
+                                <input type="radio" name="q5">
+                                \(0.050\)
+                            </label>
+                        </div>
+                    </li>
+                </ol>
+
+                <div style="text-align:center; margin-top:10px;">
+                    <button class="btn" onclick="verificarCuestionario()">Verificar respuestas</button>
+                </div>
+
+                <p id="resultadoCuestionario" class="resultado-test"></p>
+
+                <div style="text-align:center; margin-top:15px;">
+                    <button class="btn" onclick="cerrarModal('modalCuestionario')">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. BIBLIOGRAFÍA -->
+    <section id="fuentes">
+        <h2>4. Bibliografía</h2>
+
+        <ul>
+            <li>
+                Beer, F. P., Johnston, E. R., DeWolf, J. T., &amp; Mazurek, D. (2016).
+                <em>Mecánica de materiales</em> (7.ª ed.). McGraw-Hill Education.
+            </li>
+            <li>
+                Hibbeler, R. C. (2018).
+                <em>Resistencia de materiales</em> (10.ª ed.). Pearson Educación.
+            </li>
+            <li>
+                Callister, W. D., &amp; Rethwisch, D. G. (2014).
+                <em>Ciencia e ingeniería de materiales</em> (9.ª ed.). John Wiley &amp; Sons.
+            </li>
+        </ul>
+    </section>
+
+    <!-- SCRIPTS -->
+
+    <!-- MENÚ ACTIVO -->
+    <script>
+        const secciones = document.querySelectorAll("section[id]");
+        const links = document.querySelectorAll(".menu a");
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const id = entry.target.getAttribute("id");
+                if (entry.isIntersecting) {
+                    links.forEach(link => link.classList.remove("activo"));
+                    const actual = document.querySelector(`.menu a[href="#${id}"]`);
+                    if (actual) actual.classList.add("activo");
+                }
+            });
+        }, {
+            threshold: 0.45
+        });
+
+        secciones.forEach(sec => observer.observe(sec));
+    </script>
+
+    <!-- MODAL -->
+    <script>
+        function abrirModal(id) {
+            document.getElementById(id).style.display = "block";
+        }
+
+        function cerrarModal(id) {
+            document.getElementById(id).style.display = "none";
+        }
+    </script>
+
+    <!-- VERIFICAR CUESTIONARIO -->
+    <script>
+        function verificarCuestionario() {
+            const contenedores = document.querySelectorAll('.opciones');
+            let correctas = 0;
+
+            document.querySelectorAll('.opcion-label').forEach(lbl => {
+                lbl.classList.remove('correcta', 'incorrecta');
+            });
+
+            contenedores.forEach(contenedor => {
+                const radios = contenedor.querySelectorAll('input[type="radio"]');
+                const correcta = contenedor.querySelector('input[data-correct="true"]');
+                let seleccionada = null;
+
+                radios.forEach(r => {
+                    if (r.checked) seleccionada = r;
+                });
+
+                const labelCorrecta = correcta ? correcta.closest('label') : null;
+
+                if (seleccionada) {
+                    const labelSel = seleccionada.closest('label');
+
+                    if (seleccionada === correcta) {
+                        correctas++;
+                        if (labelSel) labelSel.classList.add('correcta');
+                    } else {
+                        if (labelSel) labelSel.classList.add('incorrecta');
+                        if (labelCorrecta) labelCorrecta.classList.add('correcta');
+                    }
+                } else {
+                    if (labelCorrecta) labelCorrecta.classList.add('correcta');
+                }
+            });
+
+            const total = contenedores.length;
+            const resultado = document.getElementById('resultadoCuestionario');
+            resultado.textContent = `Respuestas correctas: ${correctas} de ${total}`;
+        }
+    </script>
+
+    <!-- MOSTRAR/OCULTAR PROCEDIMIENTOS -->
+    <script>
+        function toggleProcedimiento(boton) {
+            const cont = boton.nextElementSibling;
+            if (!cont) return;
+
+            if (cont.style.display === "none" || cont.style.display === "") {
+                cont.style.display = "block";
+                boton.textContent = "Ocultar procedimiento";
+            } else {
+                cont.style.display = "none";
+                boton.textContent = "Ver procedimiento";
+            }
+        }
+    </script>
+
+    <!-- SELECCIÓN DE FILAS EN TABLAS -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const filas = document.querySelectorAll('.tabla-resumen tr, .tabla-simple tr');
+
+            filas.forEach(fila => {
+                fila.addEventListener('click', () => {
+                    const tabla = fila.closest('table');
+                    if (!tabla) return;
+
+                    tabla.querySelectorAll('tr').forEach(tr => tr.classList.remove('fila-seleccionada'));
+                    fila.classList.add('fila-seleccionada');
+                });
+            });
+        });
+    </script>
+
+    <!-- MATHJAX -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)']],
+                displayMath: [['\\[', '\\]']]
+            },
+            chtml: {
+                scale: 1.0
+            }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+</body>
+
+</html>
