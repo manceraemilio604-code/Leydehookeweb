@@ -155,6 +155,16 @@
             padding-top: 10px;
         }
 
+        /* TARJETA ESTILO INTRO (CUADRO BLANCO) */
+        .card-intro {
+            background: #ffffff;
+            border-radius: 18px;
+            box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+            padding: 35px 45px 40px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
         /* TÍTULOS Y SUBTÍTULOS A LA IZQUIERDA */
         section h2 {
             font-size: 28px;
@@ -402,49 +412,50 @@
             text-align: center;
         }
 
- .img-tooltip {
-    position: relative;
-    display: inline-block;   /* sólo ocupa el tamaño de la imagen */
-}
+        .img-tooltip {
+            position: relative;
+            display: inline-block;
+            /* sólo ocupa el tamaño de la imagen */
+        }
 
-/* TOOLTIP A LA DERECHA, CENTRADO EN ALTURA */
-.tooltip-box {
-    position: absolute;
-    top: 50%;                /* mitad de la imagen */
-    right: -10px;            /* pegado al borde derecho */
-    left: auto;
-    transform: translate(100%, -50%);  /* lo sacas hacia la derecha y lo centras verticalmente */
+        /* TOOLTIP A LA DERECHA, CENTRADO EN ALTURA */
+        .tooltip-box {
+            position: absolute;
+            top: 50%;
+            /* mitad de la imagen */
+            right: -10px;
+            /* pegado al borde derecho */
+            left: auto;
+            transform: translate(100%, -50%);
+            /* lo sacas hacia la derecha y lo centras verticalmente */
 
-    background: rgba(0, 0, 0, 0.85);
-    color: #ffffff;
-    padding: 10px 14px;
-    border-radius: 6px;
-    font-size: 13px;
-    max-width: 280px;
-    text-align: left;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.25s ease;
-    z-index: 50;
+            background: rgba(0, 0, 0, 0.85);
+            color: #ffffff;
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+            max-width: 280px;
+            text-align: left;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+            z-index: 50;
 
-    /* para que el texto y el link no se salgan */
-    white-space: normal;
-    overflow-wrap: anywhere;
-    word-break: break-word;
-}
+            /* para que el texto y el link no se salgan */
+            white-space: normal;
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
 
-.tooltip-box a {
-    color: #90e0ef;
-    text-decoration: underline;
-    word-break: break-word;
-}
+        .tooltip-box a {
+            color: #90e0ef;
+            text-decoration: underline;
+            word-break: break-word;
+        }
 
-.img-tooltip:hover .tooltip-box {
-    opacity: 1;
-}
-
-
-
+        .img-tooltip:hover .tooltip-box {
+            opacity: 1;
+        }
 
         /* RESPONSIVO */
         @media (max-width: 768px) {
@@ -458,6 +469,10 @@
             #fuentes {
                 padding-left: 20px;
                 padding-right: 20px;
+            }
+
+            .card-intro {
+                padding: 25px 20px 30px;
             }
 
             .hero-text h1 {
@@ -497,41 +512,41 @@
         <a href="#fuentes">Bibliografía</a>
     </nav>
 
-    <!-- ========= CONTENIDO SIN TARJETA CENTRAL (LIBRE) ========= -->
-
     <!-- 1. INTRODUCCIÓN -->
     <section id="introduccion">
-        <h2>1. Introducción</h2>
+        <div class="card-intro">
+            <h2>1. Introducción</h2>
 
-        <p>
-            La Ley de Hooke generalizada describe cómo responde un sólido elástico cuando se le aplican cargas en
-            distintas direcciones. A diferencia de la forma uniaxial, esta versión considera el comportamiento
-            tridimensional del material, incluyendo la interacción entre esfuerzos normales, esfuerzos cortantes y las
-            deformaciones asociadas.
-        </p>
+            <p>
+                La Ley de Hooke generalizada describe cómo responde un sólido elástico cuando se le aplican cargas en
+                distintas direcciones. A diferencia de la forma uniaxial, esta versión considera el comportamiento
+                tridimensional del material, incluyendo la interacción entre esfuerzos normales, esfuerzos cortantes y las
+                deformaciones asociadas.
+            </p>
 
-        <p>
-            Comprender esta relación esfuerzo–deformación es esencial para analizar piezas sometidas a carga, predecir
-            cómo se deforman los sólidos y determinar los límites en los que un material conserva un comportamiento
-            elástico lineal. Esta ley constituye la base para el diseño mecánico, el análisis estructural y la
-            modelación matemática de componentes reales.
-        </p>
+            <p>
+                Comprender esta relación esfuerzo–deformación es esencial para analizar piezas sometidas a carga, predecir
+                cómo se deforman los sólidos y determinar los límites en los que un material conserva un comportamiento
+                elástico lineal. Esta ley constituye la base para el diseño mecánico, el análisis estructural y la
+                modelación matemática de componentes reales.
+            </p>
 
-        <!-- Imagen conceptual general -->
-        <div class="img-centro">
-            <div class="img-tooltip">
-                <img src="Imagenes/diagrama_esfuerzo_deformacion_general.png"
-                    alt="Diagrama esfuerzo-deformación uniaxial" style="max-width: 60%; height: auto;">
-                <div class="tooltip-box">
-                    Imagen recuperada de:
-                    <br>
-                    <a href="https://i.pinimg.com/564x/ec/0b/d2/ec0bd22b8747deaaacf92d3aa41d66d0.jpg" target="_blank">
-                        https://i.pinimg.com/564x/ec/0b/d2/ec0bd22b8747deaaacf92d3aa41d66d0.jpg
-                    </a>
+            <!-- Imagen conceptual general -->
+            <div class="img-centro">
+                <div class="img-tooltip">
+                    <img src="Imagenes/diagrama_esfuerzo_deformacion_general.png"
+                        alt="Diagrama esfuerzo-deformación uniaxial" style="max-width: 60%; height: auto;">
+                    <div class="tooltip-box">
+                        Imagen recuperada de:
+                        <br>
+                        <a href="https://i.pinimg.com/564x/ec/0b/d2/ec0bd22b8747deaaacf92d3aa41d66d0.jpg" target="_blank">
+                            https://i.pinimg.com/564x/ec/0b/d2/ec0bd22b8747deaaacf92d3aa41d66d0.jpg
+                        </a>
+                    </div>
                 </div>
-            </div>
-            <div class="pie-imagen">
-                Figura 1. Curva esfuerzo–deformación uniaxial típica.
+                <div class="pie-imagen">
+                    Figura 1. Curva esfuerzo–deformación uniaxial típica.
+                </div>
             </div>
         </div>
     </section>
