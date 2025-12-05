@@ -417,7 +417,7 @@
             display: inline-block;
         }
 
-        /* TOOLTIP A LA DERECHA, CENTRADO EN ALTURA */
+        /* TOOLTIP A LA DERECHA, CENTRADO EN ALTURA - IMÁGENES */
         .tooltip-box {
             position: absolute;
             top: 50%;
@@ -448,6 +448,63 @@
 
         .img-tooltip:hover .tooltip-box {
             opacity: 1;
+        }
+
+        /* TOOLTIP DE REFERENCIA "VER FUENTE" (TEXTO) */
+        .ref-tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            font-size: 12px;
+            color: var(--secundario);
+            margin-left: 8px;
+            padding: 2px 8px;
+            border-radius: 999px;
+            background: rgba(10, 147, 150, 0.08);
+        }
+
+        .ref-tooltip.ref-right {
+            float: right;
+            margin-left: 12px;
+        }
+
+        .ref-tooltip:hover {
+            background: rgba(10, 147, 150, 0.18);
+        }
+
+        .ref-tooltip-box {
+            position: absolute;
+            right: 0;
+            top: 130%;
+            max-width: 300px;
+            background: rgba(255, 255, 255, 0.97);
+            color: #000;
+            font-size: 12px;
+            line-height: 1.4;
+            padding: 8px 10px;
+            border-radius: 8px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+            opacity: 0;
+            transform: translateY(-4px);
+            transition: opacity 0.25s ease, transform 0.25s ease;
+            pointer-events: none;
+            text-align: left;
+            z-index: 25;
+        }
+
+        .ref-tooltip-box::before {
+            content: "";
+            position: absolute;
+            top: -8px;
+            right: 18px;
+            border-width: 0 7px 8px 7px;
+            border-style: solid;
+            border-color: transparent transparent rgba(255, 255, 255, 0.97) transparent;
+        }
+
+        .ref-tooltip:hover .ref-tooltip-box {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* RESPONSIVO */
@@ -518,6 +575,12 @@
                 distintas direcciones. A diferencia de la forma uniaxial, esta versión considera el comportamiento
                 tridimensional del material, incluyendo la interacción entre esfuerzos normales, esfuerzos cortantes y las
                 deformaciones asociadas.
+                <span class="ref-tooltip ref-right">
+                    Ver fuente
+                    <span class="ref-tooltip-box">
+                        Descripción general basada en Beer et al. (2016) y Hibbeler (2018).
+                    </span>
+                </span>
             </p>
 
             <p>
@@ -525,6 +588,13 @@
                 cómo se deforman los sólidos y determinar los límites en los que un material conserva un comportamiento
                 elástico lineal. Esta ley constituye la base para el diseño mecánico, el análisis estructural y la
                 modelación matemática de componentes reales.
+                <span class="ref-tooltip ref-right">
+                    Ver fuente
+                    <span class="ref-tooltip-box">
+                        Importancia de la Ley de Hooke en el diseño y análisis estructural tomada de Beer et al. (2016),
+                        Hibbeler (2018) y Callister y Rethwisch (2014).
+                    </span>
+                </span>
             </p>
 
             <!-- Imagen conceptual general -->
@@ -618,6 +688,12 @@
                 de esfuerzo se reduce entonces a un solo esfuerzo normal \(\sigma\) y a una sola deformación normal
                 \(\varepsilon\), por lo que la relación constitutiva del material se simplifica a la forma lineal
                 \(\sigma = E\,\varepsilon\).
+                <span class="ref-tooltip ref-right">
+                    Ver fuente
+                    <span class="ref-tooltip-box">
+                        Desarrollo de la Ley de Hooke unidimensional tomado de Beer et al. (2016) y Hibbeler (2018).
+                    </span>
+                </span>
             </p>
 
             <p>
@@ -702,6 +778,13 @@
             <p>
                 Estas ecuaciones indican que la deformación en un eje depende del esfuerzo en ese mismo eje y también de los
                 esfuerzos en los ejes perpendiculares.
+                <span class="ref-tooltip ref-right">
+                    Ver fuente
+                    <span class="ref-tooltip-box">
+                        Forma generalizada de la Ley de Hooke para sólidos isotrópicos tomada de Beer et al. (2016) y
+                        Hibbeler (2018).
+                    </span>
+                </span>
             </p>
 
             <!-- 2.4 -->
@@ -734,6 +817,18 @@
                 <li>\(\nu\): coeficiente de Poisson</li>
                 <li>\(G\): módulo cortante, propiedad que describe la resistencia del material a deformarse por cortante</li>
             </ul>
+
+            <p>
+                Esta relación se utiliza para obtener el módulo cortante a partir de datos de tracción uniaxial cuando no se
+                cuenta con ensayos específicos de cortante.
+                <span class="ref-tooltip ref-right">
+                    Ver fuente
+                    <span class="ref-tooltip-box">
+                        Relación entre módulos elásticos adaptada de Beer et al. (2016), Hibbeler (2018) y Callister y
+                        Rethwisch (2014).
+                    </span>
+                </span>
+            </p>
 
             <div class="img-centro">
                 <div class="img-tooltip">
@@ -810,6 +905,13 @@
 
             <p>
                 Esta formulación es utilizada en métodos numéricos, como el Método de Elemento Finito.
+                <span class="ref-tooltip ref-right">
+                    Ver fuente
+                    <span class="ref-tooltip-box">
+                        Forma matricial de la Ley de Hooke tomada de textos clásicos de mecánica de materiales, como Beer
+                        et al. (2016) y Hibbeler (2018).
+                    </span>
+                </span>
             </p>
 
             <!-- 2.6 -->
@@ -842,6 +944,18 @@
                 <li>\(\sigma_x + \sigma_y + \sigma_z\): suma de esfuerzos normales en cada eje</li>
             </ul>
 
+            <p>
+                Esta expresión permite estimar cambios de volumen bajo estados de esfuerzo hidrostático, relevantes en
+                problemas de compresibilidad y respuesta volumétrica de materiales.
+                <span class="ref-tooltip ref-right">
+                    Ver fuente
+                    <span class="ref-tooltip-box">
+                        Definición de deformación volumétrica y su relación con el estado hidrostático basada en Beer et al.
+                        (2016) y Hibbeler (2018).
+                    </span>
+                </span>
+            </p>
+
             <!-- 2.7 -->
             <h3>2.7. Materiales anisotrópicos</h3>
 
@@ -855,6 +969,12 @@
                 Ejemplos: compuestos de fibra, madera, metales laminados, polímeros orientados. Estos materiales requieren
                 un conjunto mayor de constantes para describir su comportamiento elástico. En la siguiente figura se compara
                 un arreglo anisotrópico en capas con un material isotrópico uniforme.
+                <span class="ref-tooltip ref-right">
+                    Ver fuente
+                    <span class="ref-tooltip-box">
+                        Descripción general de materiales anisotrópicos basada en Callister y Rethwisch (2014).
+                    </span>
+                </span>
             </p>
 
             <div class="img-centro">
@@ -1275,7 +1395,7 @@
 
             <ul>
                 <li>
-                    Beer, F. P., Johnston, E. R., DeWolf, J. T., &amp; Mazurek, D. (2016).
+                    Beer, F. P., Johnston, E. R., DeWolf, J. T. y Mazurek, D. (2016).
                     <em>Mecánica de materiales</em> (7.ª ed.). McGraw-Hill Education.
                 </li>
                 <li>
@@ -1283,7 +1403,7 @@
                     <em>Resistencia de materiales</em> (10.ª ed.). Pearson Educación.
                 </li>
                 <li>
-                    Callister, W. D., &amp; Rethwisch, D. G. (2014).
+                    Callister, W. D. y Rethwisch, D. G. (2014).
                     <em>Ciencia e ingeniería de materiales</em> (9.ª ed.). John Wiley &amp; Sons.
                 </li>
             </ul>
