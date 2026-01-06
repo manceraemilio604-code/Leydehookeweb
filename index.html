@@ -2,12 +2,12 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fundamentos de la Ley de Hooke Generalizada</title>
 
     <!-- Fuente -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
 
     <style>
         html {
@@ -392,7 +392,7 @@
             background-color: #bbdefb !important;
         }
 
-        /* IMÁGENES CENTRADAS + TOOLTIP */
+        /* IMÁGENES CENTRADAS */
         .img-centro {
             text-align: center;
             margin: 18px 0;
@@ -412,49 +412,60 @@
             text-align: center;
         }
 
-        .img-tooltip {
+        /* TOOLTIP ELEGANTE PARA REFERENCIAS (MISMO ESTILO QUE ENGRANES) */
+        .img-ref-wrapper {
             position: relative;
             display: inline-block;
         }
 
-        /* TOOLTIP A LA DERECHA, CENTRADO EN ALTURA - IMÁGENES */
-        .tooltip-box {
+        .carrusel-tooltip {
             position: absolute;
-            top: 50%;
-            right: -10px;
-            left: auto;
-            transform: translate(100%, -50%);
-            background: rgba(0, 0, 0, 0.85);
-            color: #ffffff;
-            padding: 10px 14px;
-            border-radius: 6px;
-            font-size: 13px;
-            max-width: 280px;
-            text-align: left;
+            top: 10px;
+            right: 10px;
+            max-width: 260px;
+            background: rgba(255, 255, 255, 0.96);
+            color: #000;
+            font-size: 11px;
+            line-height: 1.4;
+            padding: 10px 12px;
+            border-radius: 10px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
             opacity: 0;
+            transform: translateY(-4px);
+            transition: opacity 0.25s ease, transform 0.25s ease;
             pointer-events: none;
-            transition: opacity 0.25s ease;
-            z-index: 50;
+            text-align: left;
             white-space: normal;
             overflow-wrap: anywhere;
             word-break: break-word;
+            z-index: 50;
         }
 
-        .tooltip-box a {
-            color: #90e0ef;
+        .carrusel-tooltip::before {
+            content: "";
+            position: absolute;
+            bottom: -8px;
+            right: 18px;
+            border-width: 8px 7px 0 7px;
+            border-style: solid;
+            border-color: rgba(255, 255, 255, 0.96) transparent transparent transparent;
+        }
+
+        .img-ref-wrapper:hover .carrusel-tooltip {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .carrusel-tooltip a {
+            color: var(--secundario);
             text-decoration: underline;
             word-break: break-word;
         }
 
-        .img-tooltip:hover .tooltip-box {
-            opacity: 1;
-        }
-
-        /* ========= CAMBIO: "VER FUENTE" CON FORMATO TIPO WIKIPEDIA ========= */
+        /* TOOLTIP DE REFERENCIA "VER FUENTE" (TEXTO) */
         .ref-tooltip {
             position: relative;
-            display: inline-flex;
-            align-items: center;
+            display: inline-block;
             cursor: pointer;
             font-size: 12px;
             color: var(--secundario);
@@ -462,7 +473,6 @@
             padding: 2px 8px;
             border-radius: 999px;
             background: rgba(10, 147, 150, 0.08);
-            user-select: none;
         }
 
         .ref-tooltip.ref-right {
@@ -478,21 +488,20 @@
             position: absolute;
             right: 0;
             top: 130%;
-            width: min(380px, 80vw);
-            background: rgba(255, 255, 255, 0.98);
+            max-width: 300px;
+            background: rgba(255, 255, 255, 0.97);
             color: #000;
             font-size: 12px;
-            line-height: 1.45;
-            padding: 10px 12px;
-            border-radius: 10px;
-            box-shadow: 0 10px 26px rgba(0, 0, 0, 0.22);
+            line-height: 1.4;
+            padding: 8px 10px;
+            border-radius: 8px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
             opacity: 0;
-            transform: translateY(-6px);
-            transition: opacity 0.22s ease, transform 0.22s ease;
+            transform: translateY(-4px);
+            transition: opacity 0.25s ease, transform 0.25s ease;
             pointer-events: none;
             text-align: left;
             z-index: 25;
-            border: 1px solid rgba(15, 23, 42, 0.08);
         }
 
         .ref-tooltip-box::before {
@@ -502,8 +511,7 @@
             right: 18px;
             border-width: 0 7px 8px 7px;
             border-style: solid;
-            border-color: transparent transparent rgba(255, 255, 255, 0.98) transparent;
-            filter: drop-shadow(0 3px 2px rgba(0, 0, 0, 0.10));
+            border-color: transparent transparent rgba(255, 255, 255, 0.97) transparent;
         }
 
         .ref-tooltip:hover .ref-tooltip-box {
@@ -511,35 +519,31 @@
             transform: translateY(0);
         }
 
-        /* Listado estilo "Referencias" como Wikipedia (compacto) */
-        .wiki-ref-title {
-            font-weight: 700;
-            color: #111827;
-            margin: 0 0 6px 0;
-            font-size: 12px;
+        /* TARJETA GRANDE DE CUESTIONARIO (como tu imagen) */
+        .cuestionario-wrapper {
+            max-width: 900px;
+            margin: 40px auto;
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 60px 40px;
+            text-align: center;
+            box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
         }
 
-        .wiki-ref {
-            margin: 0;
-            padding-left: 18px;
-            font-size: 12px;
-            line-height: 1.45;
-            color: #111827;
+        .cuestionario-wrapper h2 {
+            margin-top: 0;
+            margin-bottom: 30px;
+            font-size: 40px;
+            font-weight: 800;
+            color: var(--primario);
+            text-align: center;
         }
 
-        .wiki-ref li {
-            margin: 0 0 6px 0;
-        }
-
-        .wiki-ref em {
-            font-style: italic;
-        }
-
-        .wiki-ref a {
-            color: var(--secundario);
-            text-decoration: underline;
-            overflow-wrap: anywhere;
-            word-break: break-word;
+        .cuestionario-wrapper .btn {
+            font-size: 18px;
+            padding: 14px 34px;
+            border-radius: 12px;
+            margin-top: 0;
         }
 
         /* RESPONSIVO */
@@ -573,28 +577,8 @@
                 font-size: 18px;
             }
 
-            nav.menu {
-                gap: 14px;
-                padding: 14px 12px;
-                flex-wrap: wrap;
-            }
-
-            nav.menu a {
-                font-size: 16px;
-            }
-
-            /* Tooltips a pantalla chica: evita que se vayan “fuera” */
-            .tooltip-box {
-                right: 0;
-                transform: translate(0, -50%);
-                width: min(320px, 82vw);
-                max-width: 82vw;
-            }
-
-            .ref-tooltip-box {
-                right: 0;
-                left: auto;
-                width: min(360px, 86vw);
+            .cuestionario-wrapper h2 {
+                font-size: 30px;
             }
         }
     </style>
@@ -632,22 +616,12 @@
             <p>
                 La Ley de Hooke generalizada describe cómo responde un sólido elástico cuando se le aplican cargas en
                 distintas direcciones. A diferencia de la forma uniaxial, esta versión considera el comportamiento
-                tridimensional del material, incluyendo la interacción entre esfuerzos normales, esfuerzos cortantes y
-                las deformaciones asociadas.
+                tridimensional del material, incluyendo la interacción entre esfuerzos normales, esfuerzos cortantes y las
+                deformaciones asociadas.
                 <span class="ref-tooltip ref-right">
                     Ver fuente
                     <span class="ref-tooltip-box">
-                        <div class="wiki-ref-title">Referencias</div>
-                        <ol class="wiki-ref">
-                            <li>
-                                Beer, F. P., Johnston, E. R., DeWolf, J. T. y Mazurek, D. (2016).
-                                <em>Mecánica de materiales</em> (7.ª ed.). McGraw-Hill Education.
-                            </li>
-                            <li>
-                                Hibbeler, R. C. (2018).
-                                <em>Resistencia de materiales</em> (10.ª ed.). Pearson Educación.
-                            </li>
-                        </ol>
+                        Beer et al. (2016) y Hibbeler (2018).
                     </span>
                 </span>
             </p>
@@ -660,33 +634,20 @@
                 <span class="ref-tooltip ref-right">
                     Ver fuente
                     <span class="ref-tooltip-box">
-                        <div class="wiki-ref-title">Referencias</div>
-                        <ol class="wiki-ref">
-                            <li>
-                                Beer, F. P., Johnston, E. R., DeWolf, J. T. y Mazurek, D. (2016).
-                                <em>Mecánica de materiales</em> (7.ª ed.). McGraw-Hill Education.
-                            </li>
-                            <li>
-                                Hibbeler, R. C. (2018).
-                                <em>Resistencia de materiales</em> (10.ª ed.). Pearson Educación.
-                            </li>
-                            <li>
-                                Callister, W. D. y Rethwisch, D. G. (2014).
-                                <em>Ciencia e ingeniería de materiales</em> (9.ª ed.). John Wiley &amp; Sons.
-                            </li>
-                        </ol>
+                        Beer et al. (2016),
+                        Hibbeler (2018) y Callister y Rethwisch (2014).
                     </span>
                 </span>
             </p>
 
             <!-- Imagen conceptual general -->
             <div class="img-centro">
-                <div class="img-tooltip">
-                    <img src="Imagenes/diagrama_esfuerzo_deformacion_general.png" alt="Diagrama esfuerzo-deformación uniaxial"
-                        style="max-width: 60%; height: auto;" />
-                    <div class="tooltip-box">
-                        Imagen recuperada de:
-                        <br />
+                <div class="img-ref-wrapper">
+                    <img src="Imagenes/diagrama_esfuerzo_deformacion_general.png"
+                        alt="Diagrama esfuerzo-deformación uniaxial" style="max-width: 60%; height: auto;">
+                    <div class="carrusel-tooltip">
+                        Imagen tomada de:
+                        <br>
                         <a href="https://i.pinimg.com/564x/ec/0b/d2/ec0bd22b8747deaaacf92d3aa41d66d0.jpg" target="_blank">
                             https://i.pinimg.com/564x/ec/0b/d2/ec0bd22b8747deaaacf92d3aa41d66d0.jpg
                         </a>
@@ -773,17 +734,7 @@
                 <span class="ref-tooltip ref-right">
                     Ver fuente
                     <span class="ref-tooltip-box">
-                        <div class="wiki-ref-title">Referencias</div>
-                        <ol class="wiki-ref">
-                            <li>
-                                Beer, F. P., Johnston, E. R., DeWolf, J. T. y Mazurek, D. (2016).
-                                <em>Mecánica de materiales</em> (7.ª ed.). McGraw-Hill Education.
-                            </li>
-                            <li>
-                                Hibbeler, R. C. (2018).
-                                <em>Resistencia de materiales</em> (10.ª ed.). Pearson Educación.
-                            </li>
-                        </ol>
+                        Beer et al. (2016) y Hibbeler (2018).
                     </span>
                 </span>
             </p>
@@ -807,11 +758,12 @@
             </p>
 
             <div class="img-centro">
-                <div class="img-tooltip">
-                    <img src="Imagenes/diagrama_unidimensional.png" alt="Gráfica fuerza-desplazamiento para un resorte ideal" />
-                    <div class="tooltip-box">
-                        Imagen recuperada de:
-                        <br />
+                <div class="img-ref-wrapper">
+                    <img src="Imagenes/diagrama_unidimensional.png"
+                        alt="Gráfica fuerza-desplazamiento para un resorte ideal">
+                    <div class="carrusel-tooltip">
+                        Imagen tomada de:
+                        <br>
                         <a href="https://cdn.fisimat.com.mx/wp-content/uploads/2015/09/Ley-de-Hooke.png" target="_blank">
                             https://cdn.fisimat.com.mx/wp-content/uploads/2015/09/Ley-de-Hooke.png
                         </a>
@@ -840,19 +792,22 @@
 
             <h4>Significado de las variables</h4>
             <ul>
-                <li>\(\varepsilon_x, \varepsilon_y, \varepsilon_z\): deformaciones normales en los ejes \(x\), \(y\) y \(z\)</li>
+                <li>\(\varepsilon_x, \varepsilon_y, \varepsilon_z\): deformaciones normales en los ejes \(x\), \(y\) y \(z\)
+                </li>
                 <li>\(\sigma_x, \sigma_y, \sigma_z\): esfuerzos normales aplicados en las direcciones \(x\), \(y\) y \(z\)</li>
                 <li>\(E\): módulo de Young</li>
                 <li>\(\nu\): coeficiente de Poisson (relaciona la deformación transversal con la longitudinal)</li>
             </ul>
 
             <div class="img-centro">
-                <div class="img-tooltip">
-                    <img src="Imagenes/cubo_esfuerzos_normales.png" alt="Cubo sometido a esfuerzos σx, σy y σz" />
-                    <div class="tooltip-box">
-                        Imagen recuperada de:
-                        <br />
-                        <a href="https://caeflow.com/wp-content/uploads/2025/07/3d-mohr-circle-calculator.png" target="_blank">
+                <div class="img-ref-wrapper">
+                    <img src="Imagenes/cubo_esfuerzos_normales.png"
+                        alt="Cubo sometido a esfuerzos σx, σy y σz">
+                    <div class="carrusel-tooltip">
+                        Imagen tomada de:
+                        <br>
+                        <a href="https://caeflow.com/wp-content/uploads/2025/07/3d-mohr-circle-calculator.png"
+                            target="_blank">
                             https://caeflow.com/wp-content/uploads/2025/07/3d-mohr-circle-calculator.png
                         </a>
                     </div>
@@ -869,17 +824,8 @@
                 <span class="ref-tooltip ref-right">
                     Ver fuente
                     <span class="ref-tooltip-box">
-                        <div class="wiki-ref-title">Referencias</div>
-                        <ol class="wiki-ref">
-                            <li>
-                                Beer, F. P., Johnston, E. R., DeWolf, J. T. y Mazurek, D. (2016).
-                                <em>Mecánica de materiales</em> (7.ª ed.). McGraw-Hill Education.
-                            </li>
-                            <li>
-                                Hibbeler, R. C. (2018).
-                                <em>Resistencia de materiales</em> (10.ª ed.). Pearson Educación.
-                            </li>
-                        </ol>
+                        Beer et al. (2016) y
+                        Hibbeler (2018).
                     </span>
                 </span>
             </p>
@@ -921,31 +867,18 @@
                 <span class="ref-tooltip ref-right">
                     Ver fuente
                     <span class="ref-tooltip-box">
-                        <div class="wiki-ref-title">Referencias</div>
-                        <ol class="wiki-ref">
-                            <li>
-                                Beer, F. P., Johnston, E. R., DeWolf, J. T. y Mazurek, D. (2016).
-                                <em>Mecánica de materiales</em> (7.ª ed.). McGraw-Hill Education.
-                            </li>
-                            <li>
-                                Hibbeler, R. C. (2018).
-                                <em>Resistencia de materiales</em> (10.ª ed.). Pearson Educación.
-                            </li>
-                            <li>
-                                Callister, W. D. y Rethwisch, D. G. (2014).
-                                <em>Ciencia e ingeniería de materiales</em> (9.ª ed.). John Wiley &amp; Sons.
-                            </li>
-                        </ol>
+                        Beer et al. (2016), Hibbeler (2018) y Callister y
+                        Rethwisch (2014).
                     </span>
                 </span>
             </p>
 
             <div class="img-centro">
-                <div class="img-tooltip">
-                    <img src="Imagenes/torsion_eje_circular.png" alt="Eje circular sometido a torsión" />
-                    <div class="tooltip-box">
-                        Imagen recuperada de:
-                        <br />
+                <div class="img-ref-wrapper">
+                    <img src="Imagenes/torsion_eje_circular.png" alt="Eje circular sometido a torsión">
+                    <div class="carrusel-tooltip">
+                        Imagen tomada de:
+                        <br>
                         <a href="https://lawebdeingeniosos.com/wp-content/uploads/2023/05/carga-01-1.png" target="_blank">
                             https://lawebdeingeniosos.com/wp-content/uploads/2023/05/carga-01-1.png
                         </a>
@@ -1018,17 +951,8 @@
                 <span class="ref-tooltip ref-right">
                     Ver fuente
                     <span class="ref-tooltip-box">
-                        <div class="wiki-ref-title">Referencias</div>
-                        <ol class="wiki-ref">
-                            <li>
-                                Beer, F. P., Johnston, E. R., DeWolf, J. T. y Mazurek, D. (2016).
-                                <em>Mecánica de materiales</em> (7.ª ed.). McGraw-Hill Education.
-                            </li>
-                            <li>
-                                Hibbeler, R. C. (2018).
-                                <em>Resistencia de materiales</em> (10.ª ed.). Pearson Educación.
-                            </li>
-                        </ol>
+                        Beer
+                        et al. (2016) y Hibbeler (2018).
                     </span>
                 </span>
             </p>
@@ -1069,17 +993,8 @@
                 <span class="ref-tooltip ref-right">
                     Ver fuente
                     <span class="ref-tooltip-box">
-                        <div class="wiki-ref-title">Referencias</div>
-                        <ol class="wiki-ref">
-                            <li>
-                                Beer, F. P., Johnston, E. R., DeWolf, J. T. y Mazurek, D. (2016).
-                                <em>Mecánica de materiales</em> (7.ª ed.). McGraw-Hill Education.
-                            </li>
-                            <li>
-                                Hibbeler, R. C. (2018).
-                                <em>Resistencia de materiales</em> (10.ª ed.). Pearson Educación.
-                            </li>
-                        </ol>
+                        Beer et al.
+                        (2016) y Hibbeler (2018).
                     </span>
                 </span>
             </p>
@@ -1100,23 +1015,18 @@
                 <span class="ref-tooltip ref-right">
                     Ver fuente
                     <span class="ref-tooltip-box">
-                        <div class="wiki-ref-title">Referencias</div>
-                        <ol class="wiki-ref">
-                            <li>
-                                Callister, W. D. y Rethwisch, D. G. (2014).
-                                <em>Ciencia e ingeniería de materiales</em> (9.ª ed.). John Wiley &amp; Sons.
-                            </li>
-                        </ol>
+                        Callister y Rethwisch (2014).
                     </span>
                 </span>
             </p>
 
             <div class="img-centro">
-                <div class="img-tooltip">
-                    <img src="Imagenes/material_anisotropico_fibras.png" alt="Comparación entre estructura anisotrópica e isotrópica" />
-                    <div class="tooltip-box">
-                        Imagen recuperada de:
-                        <br />
+                <div class="img-ref-wrapper">
+                    <img src="Imagenes/material_anisotropico_fibras.png"
+                        alt="Comparación entre estructura anisotrópica e isotrópica">
+                    <div class="carrusel-tooltip">
+                        Imagen tomada de:
+                        <br>
                         <a href="https://www.researchgate.net/publication/326780343/figure/fig1/AS:11431281207863077@1701349093215/The-difference-between-anisotropic-and-isotropic-surfaces-a-Anisotropic-surfaces-have.tif"
                             target="_blank">
                             https://www.researchgate.net/.../The-difference-between-anisotropic-and-isotropic-surfaces...
@@ -1145,11 +1055,14 @@
 
             <h4>Datos</h4>
 
+            <!-- CAMBIO: saltos de línea reales en MathJax y centrado -->
             <div class="equation">
                 \[
-                \sigma_x = 120 \text{ MPa}, \quad
-                \sigma_y = 30 \text{ MPa}, \quad
-                \sigma_z = 0
+                \begin{aligned}
+                \sigma_x &= 120 \ \text{MPa} \\
+                \sigma_y &= 30 \ \text{MPa} \\
+                \sigma_z &= 0
+                \end{aligned}
                 \]
             </div>
 
@@ -1157,10 +1070,13 @@
                 <li>\(\sigma_x, \sigma_y, \sigma_z\): esfuerzos aplicados</li>
             </ul>
 
+            <!-- CAMBIO: saltos de línea reales en MathJax y centrado -->
             <div class="equation">
                 \[
-                E = 70 \text{ GPa}, \quad
-                \nu = 0.33
+                \begin{aligned}
+                E &= 70 \ \text{GPa} \\
+                \nu &= 0.33
+                \end{aligned}
                 \]
             </div>
 
@@ -1356,11 +1272,10 @@
             <!-- CUESTIONARIO -->
             <h3>Cuestionario</h3>
 
-            <div class="container">
-                <div class="box">
-                    <h3 style="color: var(--primario); text-align:left;">Cuestionario</h3>
-                    <button class="btn" onclick="abrirModal('modalCuestionario')">Ver ejercicios</button>
-                </div>
+            <!-- Tarjeta grande -->
+            <div class="cuestionario-wrapper">
+                <h2>Cuestionario</h2>
+                <button class="btn" onclick="abrirModal('modalCuestionario')">Ver ejercicios</button>
             </div>
 
             <div id="modalCuestionario" class="modal">
@@ -1371,26 +1286,26 @@
                     <ol>
                         <!-- PREGUNTA 1 -->
                         <li>
-                            <strong>1. Esfuerzo y deformación uniaxial</strong><br />
+                            <strong>1. Esfuerzo y deformación uniaxial</strong><br>
                             Una barra de acero con módulo de Young
-                            \(E = 200 \text{ GPa}\) se somete a un esfuerzo normal de \(100 \text{ MPa}\).<br />
+                            \(E = 200 \text{ GPa}\) se somete a un esfuerzo normal de \(100 \text{ MPa}\).<br>
                             ¿Cuál es la deformación resultante?
 
                             <div class="opciones" data-pregunta="1">
                                 <label class="opcion-label">
-                                    <input type="radio" name="q1" data-correct="true" />
+                                    <input type="radio" name="q1" data-correct="true">
                                     \(5 \times 10^{-4}\)
                                 </label>
                                 <label class="opcion-label">
-                                    <input type="radio" name="q1" />
+                                    <input type="radio" name="q1">
                                     \(2 \times 10^{-4}\)
                                 </label>
                                 <label class="opcion-label">
-                                    <input type="radio" name="q1" />
+                                    <input type="radio" name="q1">
                                     \(1 \times 10^{-3}\)
                                 </label>
                                 <label class="opcion-label">
-                                    <input type="radio" name="q1" />
+                                    <input type="radio" name="q1">
                                     \(1 \times 10^{-2}\)
                                 </label>
                             </div>
@@ -1398,26 +1313,26 @@
 
                         <!-- PREGUNTA 2 -->
                         <li>
-                            <strong>2. Efecto Poisson</strong><br />
-                            Un elemento estructural experimenta una deformación longitudinal de \(0.002\).<br />
-                            El coeficiente de Poisson del material es \(\nu = 0.3\).<br />
+                            <strong>2. Efecto Poisson</strong><br>
+                            Un elemento estructural experimenta una deformación longitudinal de \(0.002\).<br>
+                            El coeficiente de Poisson del material es \(\nu = 0.3\).<br>
                             ¿Cuál es la deformación transversal aproximada?
 
                             <div class="opciones" data-pregunta="2">
                                 <label class="opcion-label">
-                                    <input type="radio" name="q2" data-correct="true" />
+                                    <input type="radio" name="q2" data-correct="true">
                                     \(-0.0006\)
                                 </label>
                                 <label class="opcion-label">
-                                    <input type="radio" name="q2" />
+                                    <input type="radio" name="q2">
                                     \(-0.002\)
                                 </label>
                                 <label class="opcion-label">
-                                    <input type="radio" name="q2" />
+                                    <input type="radio" name="q2">
                                     \(-0.0003\)
                                 </label>
                                 <label class="opcion-label">
-                                    <input type="radio" name="q2" />
+                                    <input type="radio" name="q2">
                                     \(0.0006\)
                                 </label>
                             </div>
@@ -1425,25 +1340,25 @@
 
                         <!-- PREGUNTA 3 -->
                         <li>
-                            <strong>3. Relación entre módulos elásticos</strong><br />
+                            <strong>3. Relación entre módulos elásticos</strong><br>
                             Para un material con \(E = 150 \text{ GPa}\) y \(\nu = 0.25\), ¿cuál es el valor aproximado del
                             módulo cortante \(G\)?
 
                             <div class="opciones" data-pregunta="3">
                                 <label class="opcion-label">
-                                    <input type="radio" name="q3" />
+                                    <input type="radio" name="q3">
                                     \(30 \text{ GPa}\)
                                 </label>
                                 <label class="opcion-label">
-                                    <input type="radio" name="q3" />
+                                    <input type="radio" name="q3">
                                     \(50 \text{ GPa}\)
                                 </label>
                                 <label class="opcion-label">
-                                    <input type="radio" name="q3" data-correct="true" />
+                                    <input type="radio" name="q3" data-correct="true">
                                     \(60 \text{ GPa}\)
                                 </label>
                                 <label class="opcion-label">
-                                    <input type="radio" name="q3" />
+                                    <input type="radio" name="q3">
                                     \(75 \text{ GPa}\)
                                 </label>
                             </div>
@@ -1451,7 +1366,7 @@
 
                         <!-- PREGUNTA 4 -->
                         <li>
-                            <strong>4. Deformación volumétrica bajo carga hidrostática</strong><br />
+                            <strong>4. Deformación volumétrica bajo carga hidrostática</strong><br>
                             Un sólido isotrópico con \(E = 210 \text{ GPa}\) y \(\nu = 0.28\) se somete a esfuerzos iguales
                             en las tres direcciones:
                             <div class="equation">
@@ -1463,19 +1378,19 @@
 
                             <div class="opciones" data-pregunta="4">
                                 <label class="opcion-label">
-                                    <input type="radio" name="q4" data-correct="true" />
+                                    <input type="radio" name="q4" data-correct="true">
                                     \(4.8 \times 10^{-4}\)
                                 </label>
                                 <label class="opcion-label">
-                                    <input type="radio" name="q4" />
+                                    <input type="radio" name="q4">
                                     \(2.0 \times 10^{-4}\)
                                 </label>
                                 <label class="opcion-label">
-                                    <input type="radio" name="q4" />
+                                    <input type="radio" name="q4">
                                     \(1.6 \times 10^{-4}\)
                                 </label>
                                 <label class="opcion-label">
-                                    <input type="radio" name="q4" />
+                                    <input type="radio" name="q4">
                                     \(3.0 \times 10^{-4}\)
                                 </label>
                             </div>
@@ -1483,26 +1398,26 @@
 
                         <!-- PREGUNTA 5 -->
                         <li>
-                            <strong>5. Deformación en un material anisotrópico</strong><br />
+                            <strong>5. Deformación en un material anisotrópico</strong><br>
                             Una placa compuesta tiene módulo longitudinal \(E_L = 100 \text{ GPa}\) y módulo transversal
                             \(E_T = 5 \text{ GPa}\). Si se aplica una tensión de \(50 \text{ MPa}\) en la
                             <strong>dirección transversal</strong>, ¿cuál es la deformación aproximada en esa dirección?
 
                             <div class="opciones" data-pregunta="5">
                                 <label class="opcion-label">
-                                    <input type="radio" name="q5" />
+                                    <input type="radio" name="q5">
                                     \(0.001\)
                                 </label>
                                 <label class="opcion-label">
-                                    <input type="radio" name="q5" />
+                                    <input type="radio" name="q5">
                                     \(0.005\)
                                 </label>
                                 <label class="opcion-label">
-                                    <input type="radio" name="q5" data-correct="true" />
+                                    <input type="radio" name="q5" data-correct="true">
                                     \(0.010\)
                                 </label>
                                 <label class="opcion-label">
-                                    <input type="radio" name="q5" />
+                                    <input type="radio" name="q5">
                                     \(0.050\)
                                 </label>
                             </div>
@@ -1545,7 +1460,7 @@
             </ul>
         </section>
 
-    </div>
+    </div> <!-- FIN DE page-wrapper -->
 
     <!-- SCRIPTS -->
 
@@ -1563,7 +1478,9 @@
                     if (actual) actual.classList.add("activo");
                 }
             });
-        }, { threshold: 0.45 });
+        }, {
+            threshold: 0.45
+        });
 
         secciones.forEach(sec => observer.observe(sec));
     </script>
@@ -1661,7 +1578,9 @@
                 inlineMath: [['\\(', '\\)']],
                 displayMath: [['\\[', '\\]']]
             },
-            chtml: { scale: 1.0 }
+            chtml: {
+                scale: 1.0
+            }
         };
     </script>
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
